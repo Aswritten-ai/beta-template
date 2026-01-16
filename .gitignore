@@ -1,0 +1,59 @@
+# Clojure / JVM build outputs
+/target/
+/classes/
+/out/
+/.cpcache/
+
+# Dependency caches
+/.mvn/
+/.lein-*
+/.deps-*
+
+# Editor / IDE artifacts
+*.iml
+.idea/
+.project
+.classpath
+.settings/
+.vscode/
+.lsp/
+.cursor/
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+/.session
+/auto-save-list/
+/tramp/
+.#*
+
+# Node / JS
+/node_modules/
+agentkit/node_modules/
+agentkit/dist/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+vite.config.ts.timestamp-*
+
+# OS / tools
+.DS_Store
+Thumbs.db
+
+# Local configuration & temp
+.env
+.env.*
+/.home/
+/.clojure-config/
+.clj-kondo/
+.cljfmt.edn
+/.calva/
+
+# Logs
+*.log
+/logs/
+
+# Generated artifacts
+manifest.json

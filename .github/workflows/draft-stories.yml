@@ -1,0 +1,38 @@
+name: storyBASE — Template Generate
+
+on:
+  push:
+    paths:
+      - '**/*.sparql'
+      - '**/*.story'
+  workflow_dispatch:
+
+jobs:
+  n8n-generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+
+      - name: List templates
+        id: list
+        run: |
+          git ls-files '*.story' | jq -R -s -c 'split("\n")|map(select(length>0))' > /tmp/templates.json
+          echo "templates=$(cat /tmp/templates.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Call n8n generate webhook
+        env:
+          N8N_WEBHOOK_URL: 'https://sic.app.n8n.cloud/webhook/story-generate'
+          GH_REPO: ${{ github.repository }}
+          GH_SHA: ${{ github.sha }}
+          GH_REF: ${{ github.ref }}
+          GH_ACTOR: ${{ github.actor }}
+          TEMPLATES: ${{ steps.list.outputs.templates }}
+        run: |
+          jq -n --arg repo "$GH_REPO" --arg sha "$GH_SHA" --arg ref "$GH_REF" \
+                --arg actor "$GH_ACTOR" --argjson templates "$TEMPLATES" \
+                '{repo:$repo, sha:$sha, ref:$ref, actor:$actor, templates:$templates, event:"story-generate"}' \
+          | curl -sS -X POST "$N8N_WEBHOOK_URL" -H "content-type: application/json" --data @-

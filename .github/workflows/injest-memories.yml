@@ -1,0 +1,37 @@
+name: storyBASE — Injest Memories
+
+on:
+  push:
+    paths:
+      - '.storyBASE/memories/*'
+  workflow_dispatch:
+
+jobs:
+  n8n-generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+
+      - name: List memories
+        id: list
+        run: |
+          git ls-files '.storyBASE/memories/*' | jq -R -s -c 'split("\n")|map(select(length>0))' > /tmp/memories.json
+          echo "memories=$(cat /tmp/memories.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Call n8n generate webhook
+        env:
+          N8N_WEBHOOK_URL: 'https://sic.app.n8n.cloud/webhook/injest-memories'
+          GH_REPO: ${{ github.repository }}
+          GH_SHA: ${{ github.sha }}
+          GH_REF: ${{ github.ref }}
+          GH_ACTOR: ${{ github.actor }}
+          memories: ${{ steps.list.outputs.memories }}
+        run: |
+          jq -n --arg repo "$GH_REPO" --arg sha "$GH_SHA" --arg ref "$GH_REF" \
+                --arg actor "$GH_ACTOR" --argjson memories "$memories" \
+                '{repo:$repo, sha:$sha, ref:$ref, actor:$actor, memories:$memories, event:"story-generate"}' \
+          | curl -sS -X POST "$N8N_WEBHOOK_URL" -H "content-type: application/json" --data @-
