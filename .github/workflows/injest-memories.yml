@@ -1,9 +1,9 @@
-name: storyBASE — Injest Memories
+name: aswritten — Injest Memories
 
 on:
   push:
     paths:
-      - '.storyBASE/memories/*'
+      - '.aswritten/memories/*'
   workflow_dispatch:
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
       - name: List memories
         id: list
         run: |
-          git ls-files '.storyBASE/memories/*' | jq -R -s -c 'split("\n")|map(select(length>0))' > /tmp/memories.json
+          git ls-files '.aswritten/memories/*' | jq -R -s -c 'split("\n")|map(select(length>0))' > /tmp/memories.json
           echo "memories=$(cat /tmp/memories.json)" >> "$GITHUB_OUTPUT"
 
       - name: Call n8n generate webhook

@@ -2,7 +2,7 @@
   "mcpServers": {
     "storyBASE": {
       "type": "http",
-      "url": "https://sic.app.n8n.cloud/mcp/storyBASE"
+      "url": "https://n8n.aswritten.ai/mcp/aswritten"
     }
   }
 }
