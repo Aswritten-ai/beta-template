@@ -28,6 +28,7 @@ jobs:
           GH_PR_NUMBER: ${{ github.event.pull_request.number }}
           N8N_WEBHOOK_URL: ${{ vars.N8N_WEBHOOK_BASE }}/webhook/injest-memories
           GH_PAT: ${{ secrets.REPO_PAT }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: |
           # Get changed memory files
           mapfile -t memories < <(git diff --name-only HEAD~1 HEAD -- '.aswritten/memories/*')
@@ -70,8 +71,9 @@ jobs:
                 --arg repo "$GH_REPO" \
                 --arg ref "$GH_REF" \
                 --arg token "$GH_PAT" \
+                --arg openrouter_key "$OPENROUTER_API_KEY" \
                 --argjson memories "[\"$memory\"]" \
-                '{repo: $repo, ref: $ref, token: $token, memories: $memories}')")
+                '{repo: $repo, ref: $ref, token: $token, openrouter_key: $openrouter_key, memories: $memories}')")
 
             http_code=$(echo "$response" | tail -1)
             body=$(echo "$response" | sed '$d')

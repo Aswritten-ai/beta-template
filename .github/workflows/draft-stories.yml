@@ -63,6 +63,7 @@ jobs:
           GH_PR_NUMBER: ${{ github.event.pull_request.number }}
           TEMPLATES: ${{ steps.list.outputs.templates }}
           DEFAULT_MODEL: 'google/gemini-3-flash-preview'
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: |
           mkdir -p /tmp/results
           declare -a templates_arr
@@ -102,8 +103,9 @@ jobs:
                   --arg actor "$GH_ACTOR" \
                   --arg token "$GH_PAT" \
                   --arg model "$DEFAULT_MODEL" \
+                  --arg openrouter_key "$OPENROUTER_API_KEY" \
                   --argjson templates "[\"$template\"]" \
-                  '{token: $token, repo: $repo, sha: $sha, ref: $ref, actor: $actor, templates: $templates, model: $model, event: "stories/draft"}')")
+                  '{token: $token, repo: $repo, sha: $sha, ref: $ref, actor: $actor, templates: $templates, model: $model, openrouter_key: $openrouter_key, event: "stories/draft"}')")
 
               http_code=$(echo "$response" | tail -1)
               body=$(echo "$response" | sed '$d')
