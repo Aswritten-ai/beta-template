@@ -74,6 +74,15 @@ Call `aswritten/remember` → returns commit SHA, triggers async extraction (5-1
 - **After calls**: Validate results; self-correct once
 - **Thread dependencies**: Compile before introspect if stale
 
+## Editing n8n Workflows
+
+When modifying workflow JSON files in `workflows/`:
+
+1. **Always bump `versionId`** - Generate a new UUID (`uuidgen`) and update the `versionId` field. The n8n instance only pulls changes when versionId changes.
+2. **Commit the versionId change** - Include it in the same commit as your workflow edits.
+
+Without a new versionId, the n8n instance will not pick up your changes.
+
 ## For This Repo
 
 Check BACKLOG.md for current tasks. Check AGENTS.md for coordination protocols.
