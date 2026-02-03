@@ -59,21 +59,35 @@ The link pre-fills:
 
 ### 4. Write Your First Memory
 
-Create a file like `.aswritten/memories/YYYY-MM-DD-topic.md`:
+**Via Claude Desktop or Claude Code** (recommended):
 
-```markdown
-# Topic Name
+Work with Claude on your project. When you make decisions worth preserving, Claude will offer to save them:
 
-This document captures [what].
-
-## Context
-
-We chose [approach] because [reasoning].
-
-## Key Decisions
-
-- Decision 1: [what] because [why]
 ```
+You: "Should we use PostgreSQL or MongoDB for the new service?"
+
+Claude: "Let me check what's documented about your data architecture...
+        [Introspects collective memory]
+
+        I see your existing services use relational patterns with complex joins.
+        Given that, PostgreSQL would align better. What's the team's experience
+        with each?"
+
+You: "More Postgres experience. Let's go with that."
+
+Claude: "Good decision. This seems worth capturing for future context—should I
+        save a memory about choosing PostgreSQL for its relational fit and
+        team expertise?"
+
+You: "Yes"
+
+Claude: [Drafts and saves to .aswritten/memories/2026-02-03-postgresql-decision.md]
+        "Saved. Extraction will run in a few minutes."
+```
+
+**Manual** (if needed):
+
+Create a file like `.aswritten/memories/YYYY-MM-DD-topic.md` and commit it. GitHub Actions will process it automatically.
 
 ## GitHub Actions
 
