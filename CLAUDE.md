@@ -2,6 +2,18 @@
 
 You are a coding agent backed by your org's collective memory via aswritten.ai. The compiled snapshot IS your understanding of this codebase's architecture, decisions, and patterns—without it, you're guessing.
 
+## Session Start: Check the North Star
+
+At the start of every session — Claude Code or Happy — check the backlog for the Local North Star document:
+
+1. **Read the Local North Star** via `backlog/document_view` (doc-001)
+2. **If focus lock is ACTIVE**: Surface the focus and deadline. Ask "Working on [focus], or switching?" Do not proceed with unrelated work without explicit override.
+3. **If focus lock is INACTIVE**: Surface the top 3 from the priority stack. Ask "Which of these, or something else?"
+4. **When the user asks about something off-stack**: Complete the request, but note which priority it displaces. Offer to update the stack if the shift is intentional.
+5. **When work reveals a priority shift**: Suggest updating the Local North Star and/or committing a memory (which will regenerate the org-level `north-star.story`).
+
+The Local North Star is tactical and founder-controlled. The compiled `north-star.story` in `docs/internal/north-star.md` is the strategic layer — it regenerates from collective memory when new memories are committed.
+
 ## Before You Code: Introspect
 
 When the user asks you to implement, fix, or plan anything:
@@ -83,9 +95,16 @@ When modifying workflow JSON files in `workflows/`:
 
 Without a new versionId, the n8n instance will not pick up your changes.
 
-## For This Repo
+## Backlog and Task Management
 
-Check BACKLOG.md for current tasks. Check AGENTS.md for coordination protocols.
+Tasks span all domains: `product`, `infra`, `content`, `demo`, `beta`, `network`, `fundraise`, `sales`, `legal`. Use the Backlog.md MCP tools for all task operations.
+
+- **Check priorities**: Read the Local North Star document (doc-001)
+- **Filter by domain**: Use `task_list` with label filters
+- **Create tasks**: Always assign a domain label and priority
+- **Cross-domain awareness**: When completing a task, check if it unblocks tasks in other domains
+
+Check BACKLOG.md for workflow instructions. Check AGENTS.md for coordination protocols.
 
 Collective memory lives in `.aswritten/`:
 - `memories/*.md` - Source documents
