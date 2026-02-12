@@ -1,11 +1,6 @@
 name: sparql/validate
 
 on:
-  push:
-    paths:
-      - '.aswritten/tx/**/*.sparql'
-      - '.aswritten/shapes.ttl'
-      - 'scripts/validate-sparql.js'
   workflow_dispatch:
 
 jobs:
