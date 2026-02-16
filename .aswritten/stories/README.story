@@ -1,7 +1,6 @@
 ---
 id: README
 destination: /
-compile_layer: layer0Plus1Plus2Plus3
 ---
 
 ### State
