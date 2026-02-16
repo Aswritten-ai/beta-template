@@ -26,7 +26,7 @@ jobs:
           GH_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
           GH_REF: ${{ github.head_ref || github.ref }}
           GH_PR_NUMBER: ${{ github.event.pull_request.number }}
-          N8N_WEBHOOK_URL: ${{ vars.N8N_WEBHOOK_BASE }}/webhook/injest-memories
+          N8N_WEBHOOK_URL: ${{ vars.N8N_WEBHOOK_BASE || 'https://n8n.aswritten.ai' }}/webhook/injest-memories
           GH_PAT: ${{ secrets.REPO_PAT }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: |

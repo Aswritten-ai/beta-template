@@ -53,7 +53,7 @@ jobs:
       - name: Process stories
         if: steps.check.outputs.skip != 'true'
         env:
-          N8N_WEBHOOK_URL: ${{ vars.N8N_WEBHOOK_BASE }}/webhook/story-generate
+          N8N_WEBHOOK_URL: ${{ vars.N8N_WEBHOOK_BASE || 'https://n8n.aswritten.ai' }}/webhook/story-generate
           GH_PAT: ${{ secrets.REPO_PAT }}
           GH_REPO: ${{ github.repository }}
           GH_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
