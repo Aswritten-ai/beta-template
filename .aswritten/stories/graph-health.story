@@ -1,7 +1,7 @@
 ---
 id: graph-health
 title: "Collective Memory Graph Analysis"
-destination: /docs/internal
+destination: /docs
 audience: graph maintainers, team leads, onboarding facilitators
 tone: analytical, actionable, diagnostic
 ---
