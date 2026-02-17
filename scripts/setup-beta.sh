@@ -17,7 +17,7 @@ sed -i '' "s|/mcp/[^\"]*|/mcp/${APP_NAME}|" .mcp.json
 echo "Updated .mcp.json with /mcp/${APP_NAME}"
 
 # Update ASWRITTEN.md
-sed -i '' "s|/mcp/APP_NAME|/mcp/${APP_NAME}|" ASWRITTEN.md
-echo "Updated ASWRITTEN.md with /mcp/${APP_NAME}"
+sed -i '' "s|/mcp/APP_NAME|/mcp/${APP_NAME}|" README.md
+echo "Updated README.md with /mcp/${APP_NAME}"
 
 echo "Done. Commit and push to complete setup."
