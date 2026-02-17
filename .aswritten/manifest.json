@@ -6,6 +6,13 @@
       null
     ]
   },
+  "docs/internal/graph-health.md": {
+    "path": "docs/internal/graph-health.md",
+    "sha": "b3fbdf9143f7a89d71d870bf8b1eab56db071165",
+    "tx": [
+      null
+    ]
+  },
   "docs/north-star.md": {
     "path": "docs/north-star.md",
     "sha": "a5826e8457349c4a6de5f7333f4a1ec3852be5fd",
