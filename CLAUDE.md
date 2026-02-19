@@ -118,6 +118,22 @@ When modifying workflow JSON files in `workflows/`:
 
 Without a new versionId, the n8n instance will not pick up your changes.
 
+### Deploying Workflow Changes to n8n
+
+After committing and pushing workflow JSON changes, they must be pulled and published in n8n:
+
+1. **Push first**: Before pulling, click "Push" (bottom-left toolbar) to check for uncommitted local n8n changes. Commit any local changes to avoid losing them — "Pull and override" will wipe unpushed edits.
+2. **Pull**: Click "Pull" (bottom-left toolbar). A dialog shows all modified workflows with their versionIds.
+3. **Open each changed workflow**: Open each workflow link from the pull dialog in a separate tab before pulling.
+4. **Pull and override**: Click "Pull and override" to import all changes.
+5. **Refresh tabs**: After pull completes, refresh each workflow tab (pages must be refreshed to display the updated workflow).
+6. **Publish each workflow**: Each pulled workflow shows an orange "Publish" button (top-right). Click it, confirm the version name, and publish. Workflows that were already active will auto-publish on pull; sub-workflows (called by other workflows, not triggered directly) need manual publish.
+
+The pull is global — it pulls all changed workflows at once. Publishing is per-workflow.
+
+**n8n URL**: `https://n8n.aswritten.ai`
+**Source control**: n8n syncs with the `workflows/` directory in this repo via git source control integration.
+
 ## Backlog and Task Management
 
 Tasks span all domains: `product`, `infra`, `content`, `demo`, `beta`, `network`, `fundraise`, `sales`, `legal`. Use the Backlog.md MCP tools for all task operations.
