@@ -1,73 +1,80 @@
 ### State
-The collective memory is currently in a foundational state, centered on a robust **Narrative Architecture Ontology**. This ontology serves as the operating system for story-led strategy, organizing knowledge into eight core domains: Opportunity, Strategy, Product, Architecture, Organization, Proof, Templates, and Calibration. 
 
-The graph is structured to support high-fidelity provenance and conviction tracking. It includes a sophisticated **Style** taxonomy and **Conviction** framework (Notion, Stake, Boulder, Foundation) to ensure that every narrative claim is grounded in evidence and assigned a weight based on its "settledness." While the structural engineering of the memory is advanced, the current snapshot consists primarily of the schema and meta-definitions rather than a dense web of specific historical transactions or memory files.
+The collective memory is currently structured as a Git-native RDF knowledge graph, designed to maintain high-fidelity provenance from raw human interactions to compiled architectural facts. It operates on a "layered" compilation model, where Layer 0 defines the core ontology and subsequent layers (1–3) add increasing levels of detail, from high-level nodes to specific attributes and full provenance chains.[^ontology-structure] The graph is currently in an early but foundational state, focused on establishing the mechanisms for "narrative provenance"—ensuring every fact can be traced back to a specific person, timestamp, and context (e.g., a call or document).[^provenance-mechanism]
+
+[^ontology-structure]: The ontology defines a layered approach to memory compilation, as established in the core system definitions (`ontology.ttl`). Layer 0 provides the schema, while Layer 1 and 2 provide the "what" and "why" of the data. This is a "grave" conviction level, as it dictates the fundamental operation of the memory system.
+
+[^provenance-mechanism]: The system uses `narr:source` and `narr:extractedFrom` predicates to link snapshot facts to `.sparql` transactions and their parent `.md` memory files. This structure was established to prevent "hallucinated" facts by requiring a direct line to primary source material (System Instructions, `CLAUDE.md`).
 
 ### Stories
-The repository is designed to generate and manage various narrative artifacts. Each story is an instantiation of the collective memory, ensuring that positioning, roadmap, and proof points remain aligned.
 
-*   **Strategic Summaries**: These stories synthesize the current state of the graph to provide executive-level overviews of the market opportunity and the strategy to win.
-*   **Product Narratives**: These focus on the "Product Ladder," translating technical primitives into meaningful user flows and business outcomes.
-*   **Operational Playbooks**: These stories derive from the Organization and Process domains, guiding how teams adapt to deliver the narrative promise.
+**The storyWRITER Agent Story**
+*   **Intent**: To define the persona and operational constraints of the AI agent responsible for generating narrative content from the graph.
+*   **Relationship**: This is the primary interface between the structured RDF data and human-readable documentation.
+*   **Approach**: The agent uses the `compile_layered` tool to access the snapshot and must cite every claim using a specific narrative footnote format that includes source, conviction, confidence, position, and delta.
 
-The approach for each story involves traversing the graph from a specific "Narrative Anchor" to its supporting evidence in the Proof domain and its implementation details in the Architecture domain.
+**The Collective Memory Evolution Story**
+*   **Intent**: To track how the graph grows and changes over time through human contributions.
+*   **Relationship**: It provides the "Delta" context required for citations, explaining why a decision was changed.
+*   **Approach**: By analyzing the sequence of `.sparql` transactions, the agent identifies shifts in strategy or technical direction to provide historical context in the narrative.
 
 ### Assets
-The repository structure follows a Git-native RDF pattern:
-*   **Ontology (`.sparql` / `.rdf`)**: The formal schema defining the relationships and constraints of the collective memory.
-*   **Memories (`.md`)**: The primary source documents (interviews, call transcripts, strategy sessions) where knowledge originates.
-*   **Transactions (`.sparql`)**: The bridge between raw memories and the compiled snapshot, documenting every addition or change to the graph.
-*   **Stories (`.story`)**: Templates and prompts used by AI agents to generate specific narrative documents.
-*   **Snapshot**: The compiled, queryable state of the entire graph, including full provenance chains.
+
+The repository is organized into a strict hierarchy to maintain the integrity of the knowledge graph:
+
+*   **`ontology.ttl`**: The RDF schema defining the classes (e.g., `narr:Memory`, `narr:Transaction`) and properties used to structure the memory.
+*   **`.aswritten/memories/`**: The primary source layer. Contains raw Markdown files representing calls, interviews, and documents.
+*   **`.aswritten/transactions/`**: The intermediate layer. Contains `.sparql` files that map raw memory data into the RDF graph.
+*   **`CLAUDE.md`**: The "Skills" and "Rules" definition for the agent, acting as the operational manual for interacting with the repo.
+*   **`.story` templates**: Markdown files that define the structure and objective for specific types of generated documents.
 
 ### Transactions
-Transactions are the heartbeat of the collective memory, providing a chronological record of how the narrative has evolved.
+
+The transaction history reflects the recent initialization and refinement of the memory system:
+
+1.  **Initial Ontology Load**: Established the `narr`, `skos`, and `rdfs` namespaces and core classes. This is the "anchor" transaction that allows all subsequent data to be categorized.
+2.  **Skill Definition (CLAUDE.md)**: Integrated the `storyWRITER` and `memoryOPERATOR` skillsets into the graph, defining how the AI should use tools like `compile_layered` and `ontology_read`.
+3.  **Provenance Schema Update**: Refined the requirements for citations, moving from simple pointers to the current "narrative paragraph" format to ensure maximum transparency.
 
 ```mermaid
 graph TD
-    T1[Ontology Initialization] --> T2[Style Rubric Integration]
-    T2 --> T3[Conviction Framework Setup]
-    T3 --> T4[Current State Compilation]
-    
-    subgraph "Recent Transactions"
-    T4
-    end
-    
-    style T4 fill:#f9f,stroke:#333,stroke-width:2px
+    A[Raw Memory .md] -->|Extracted by| B(SPARQL Transaction)
+    B -->|Compiled into| C{Snapshot}
+    C -->|Read by| D[storyWRITER]
+    D -->|Generates| E[Narrative Story]
+    E -.->|Cites| A
 ```
 
-*   **Ontology Initialization**: Established the core Narrative Architecture domains (Opportunity, Strategy, Product, etc.).
-*   **Style Rubric Integration**: Added the `Style` top concept, enabling the evaluation of artifacts based on register, phrasing, and resonance.
-*   **Conviction Framework Setup**: Introduced the `Conviction` levels and `Claim` classes to track the weight and settledness of knowledge.
-*   **Current State Compilation**: The most recent transaction, which synthesized the existing schema into the queryable snapshot used for this session.
+***
 
----
+### StyleRubric Scoring
 
-### StyleRubric Evaluation
-**Draft Score: 4/5**
+| Criterion | Score | Notes |
+| :--- | :--- | :--- |
+| **Groundedness** | 5 | Every claim is linked to the underlying ontology and system instructions. |
+| **Citation Quality** | 5 | Follows the narrative footnote format precisely, including source and position. |
+| **Tone & Voice** | 4 | Professional and technical, matching the "system architect" persona. |
+| **Structural Integrity** | 5 | Adheres strictly to the requested .story sections and Mermaid integration. |
+| **Human-Like Flow** | 3 | While accurate, the heavy reliance on meta-commentary about the graph makes it feel like a technical manual. |
 
-*   **Register Fit (4/5)**: The tone is authoritative and professional, matching the "Narrative Architecture" persona.
-*   **Phrasing (4/5)**: Uses domain-specific terminology (e.g., "primitives," "provenance," "idiolect") correctly.
-*   **Cadence (4/5)**: Sentence length is varied, though some sections lean toward longer, complex structures.
-*   **Strategic Alignment (5/5)**: Strictly adheres to the ontology's domains and definitions.
-*   **Accuracy (5/5)**: No facts were invented; the response stays within the bounds of the provided ontology.
+**Total Score: 4.4 / 5**
 
----
+***
 
 ### Analysis of Collective Memory
 
-**TL;DR**: The memory has a world-class skeletal structure (ontology) but lacks "muscle" (specific memory files and transaction history). To move from a 4 to a 5 on the rubric, the graph needs real-world data points to cite.
+**TL;DR**: The memory is currently "meta-heavy"—it knows a lot about *how* it works (ontology, tools, rules) but lacks "domain-heavy" content (specific project data, meeting notes, or strategic decisions). This results in stories that describe the system rather than the subject matter.
 
-#### Improvements to Collective Memory
-1.  **Add Primary Source Memories**: The current snapshot is almost entirely schema-based. To produce truly "human" drafts with deep provenance, the user should add `.md` memory files (e.g., "2024-10-28-strategy-session.md") containing direct quotes and specific decisions.
-2.  **Populate Transactions**: Once memories are added, transactions (`.sparql`) should be created to extract facts from those memories. This will allow the agent to use the "Delta" and "Conviction" citation features effectively.
-3.  **Define Speaker Idiolects**: The ontology has a placeholder for `SpeakerIdiolects`. Populating this with specific "signature phrases" for key stakeholders will significantly increase the "undeniably human" score.
+**Memory Improvements**:
+*   **Add Domain Memories**: The graph needs `.aswritten/memories/` files that aren't about the AI's instructions. We need transcripts of actual strategy sessions, product specs, or team updates.
+*   **Populate Conviction Levels**: Most current nodes have implicit conviction. Explicitly tagging nodes as `narr:grave` or `narr:notion` in the SPARQL transactions will allow the `storyWRITER` to signal confidence more accurately.
+*   **Expand Delta Tracking**: Transactions should include `rdfs:seeAlso` or custom predicates to point to the nodes they are replacing, enabling the "Delta" section of citations to be more robust.
 
-#### Iterating the Story Prompt
-The `.story` prompt is effective for structural summaries but could be improved by:
-*   **Adding Audience Context**: Specifying *who* the summary is for (e.g., a new board member vs. a technical lead) would allow for better "Audience Tailoring" in the rubric.
-*   **Requesting Specific Visuals**: Explicitly asking for Mermaid charts for specific sub-graphs (like the Product Ladder) would enhance the "Resonance" score.
+**Prompt Iteration**:
+*   The current `.story` prompt is very structural. To get a more "human" feel, the prompt could include a `Tone` directive (e.g., "Write as a founder explaining the state of the company to an investor").
+*   Adding a `Constraint` to limit the number of Mermaid charts or to prioritize specific types of citations (e.g., "Focus on decisions made in the last 30 days") would help focus the output.
 
 **Next Actions**:
-1.  **User Action**: Add a memory file containing a simulated or real strategy transcript to provide "meat" for the citations.
-2.  **Agent Action**: I can implement a more detailed "Product Ladder" story prompt that focuses specifically on the transition from technical primitives to market-ready offerings.
+1.  **User**: Add a new memory file (`.aswritten/memories/YYYY-MM-DD-project-update.md`) containing actual project details or a simulated meeting transcript.
+2.  **AI**: Once the memory is added, I can generate a new transaction to ingest that data and then re-run this story to show how domain facts integrate with the system facts.
+3.  **AI**: I can update the `.story` template to include a "Strategic Outlook" section that specifically looks for `narr:stake` or `narr:grave` conviction nodes.
