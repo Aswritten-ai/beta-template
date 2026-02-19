@@ -87,6 +87,11 @@ Sessions on complex tasks (workflow edits, graph analysis, multi-file refactors)
 - **At ~60% context usage**: Write progress notes to the relevant backlog task via `task_edit` with `notesAppend`. Include: what's done, what's pending, which files changed, key decisions made.
 - **Before any multi-step workflow edit**: Note the approach in the backlog task FIRST, then execute.
 - **Editing workflow JSON**: The jsCode inside workflow JSON is a single escaped string. The Edit tool cannot match patterns inside it. Use Python scripts (`json.load` → modify code string → `json.dump`) to programmatically edit JavaScript within workflow JSON.
+- **At ~75% context or when user says "retro"**: Run a session retrospective before closing out. Cover:
+  1. **What worked well** — tool choices, task ordering, subagent usage, patterns that saved time
+  2. **What didn't work** — wasted context, dead ends, wrong tool for the job, corrections from user
+  3. **Proposed CLAUDE.md additions** — concrete prompt text for new instructions that would have prevented the problems or codified the wins. Present as diffs the user can approve.
+  4. **Next session handoff** — verify task notes are current, acceptance criteria checked, all changes committed and pushed
 
 ## Tool Protocol
 
