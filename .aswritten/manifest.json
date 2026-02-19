@@ -1,4 +1,11 @@
 {
+  "docs/internal/north-star.md": {
+    "path": "docs/internal/north-star.md",
+    "sha": "d35e863e787afd9435784db9f08849d0bf21f4fb",
+    "tx": [
+      null
+    ]
+  },
   "docs/summary.md": {
     "path": "docs/summary.md",
     "sha": "84facc7d34c139d56629e4f705b9e8f2ebe9ac3d",
