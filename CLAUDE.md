@@ -93,6 +93,16 @@ Sessions on complex tasks (workflow edits, graph analysis, multi-file refactors)
   3. **Proposed CLAUDE.md additions** — concrete prompt text for new instructions that would have prevented the problems or codified the wins. Present as diffs the user can approve.
   4. **Next session handoff** — verify task notes are current, acceptance criteria checked, all changes committed and pushed
 
+## Before Implementing: Propose the Architecture
+
+Before writing code or editing workflows, propose the change architecture to the user. Even for "obvious" fixes:
+
+1. **State the change** — what files, what nodes, what the diff looks like
+2. **State the approach** — why this path over alternatives. Prefer modifying existing nodes/parameters over adding new ones. Prefer reusable patterns over one-off solutions.
+3. **Wait for approval** — the user may see a simpler path or want a different abstraction
+
+Do not skip this for "small" changes. Small changes compound into architecture. Every implementation choice is a design decision.
+
 ## Tool Protocol
 
 - **Before calls**: State purpose briefly
