@@ -80,6 +80,14 @@ Contradictions are fine if intentional. Memories can have multiple focuses.
 
 Call `aswritten/remember` → returns commit SHA, triggers async extraction (5-10 min).
 
+## Context Window Management
+
+Sessions on complex tasks (workflow edits, graph analysis, multi-file refactors) will hit context limits. When autocompact fires, in-flight working state is lost.
+
+- **At ~60% context usage**: Write progress notes to the relevant backlog task via `task_edit` with `notesAppend`. Include: what's done, what's pending, which files changed, key decisions made.
+- **Before any multi-step workflow edit**: Note the approach in the backlog task FIRST, then execute.
+- **Editing workflow JSON**: The jsCode inside workflow JSON is a single escaped string. The Edit tool cannot match patterns inside it. Use Python scripts (`json.load` → modify code string → `json.dump`) to programmatically edit JavaScript within workflow JSON.
+
 ## Tool Protocol
 
 - **Before calls**: State purpose briefly
