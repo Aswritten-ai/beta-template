@@ -1,8 +1,7 @@
 ---
 id: north-star
 title: "North Star"
-destination: /docs
-compile_layer: layer0Plus1
+destination: /docs/internal
 audience: founder, AI coworkers (Claude Code, Happy)
 tone: direct, decisive, strategic
 ---

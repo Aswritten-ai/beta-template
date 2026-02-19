@@ -1,8 +1,7 @@
 ---
 id: narrative-cheatsheet
 title: "Narrative & Marketing Cheatsheet"
-destination: /docs
-compile_layer: layer0Plus1Plus2
+destination: /docs/marketing
 audience: internal team, advisors, sales, content creators
 tone: clear, concise, reference-ready, canonical
 ---

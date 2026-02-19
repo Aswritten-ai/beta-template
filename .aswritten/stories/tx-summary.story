@@ -1,8 +1,7 @@
 ---
 id: tx-summary
 title: "Transaction Summary"
-destination: /docs/tx-summaries
-compile_layer: layer0Plus1
+destination: .aswritten/stories/tx-summaries
 increment: true
 audience: reviewers, team members
 tone: concise, factual, change-focused
