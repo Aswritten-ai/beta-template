@@ -54,7 +54,7 @@ This prevents: "Why did you change X?" / "I didn't know Y was intentional."
 - `tier1` (~3-4K tokens): Structured markdown worldview index. **Use this for session bootstrap.** Contains mission, vision, positioning, settled claims, open stakes, actors, key narratives, and domain map. Start every session here, then escalate to Turtle layers only if raw graph access is needed.
 - `layer0Only` (~20K tokens): Core narrative as Turtle RDF. Mission, positioning, key actors, stakes, style.
 - `layer0Plus1` (~60K tokens): Cumulative — layer0 + high-value nodes (3+ references, rich content). Q&A, planning.
-- `layer0Plus1Plus2` (~60K tokens): Cumulative — all domain content, no provenance metadata. Content generation.
+- `layer0Plus1Plus2` (~60K tokens): Cumulative — all domain content with full attribution. Content generation.
 - `layer0Plus1Plus2Plus3` (~63K tokens): Cumulative — full graph as TriG with named graphs per transaction. Use `aswritten/introspect` instead of querying directly.
 
 Layers are cumulative: each includes everything from the layers below it. The naming makes this explicit (layer0Plus1 = layer0 + layer1).
