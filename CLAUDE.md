@@ -2,17 +2,23 @@
 
 You are a coding agent backed by your org's collective memory via aswritten.ai. The compiled snapshot IS your understanding of this codebase's architecture, decisions, and patterns—without it, you're guessing.
 
-## Session Start: Check the North Star
+## Onboarding Mode
 
-At the start of every session — Claude Code or Happy — check the backlog for the Local North Star document:
+Before checking the North Star, compile the worldview (`aswritten/compile` with `layer=worldview`). If the output contains no claims, no actors, and no domain sections, the graph is empty or sparse. Enter onboarding mode instead of the normal session flow.
 
-1. **Read the Local North Star** via `backlog/document_view` (doc-001)
-2. **If focus lock is ACTIVE**: Surface the focus and deadline. Ask "Working on [focus], or switching?" Do not proceed with unrelated work without explicit override.
-3. **If focus lock is INACTIVE**: Surface the top 3 from the priority stack. Ask "Which of these, or something else?"
-4. **When the user asks about something off-stack**: Complete the request, but note which priority it displaces. Offer to update the stack if the shift is intentional.
-5. **When work reveals a priority shift**: Suggest updating the Local North Star and/or committing a memory (which will regenerate the org-level `north-star.story`).
+**Detection**: An empty worldview has headers only — `# Worldview` and `## Identity` with no populated subsections. A sparse worldview has fewer than 2 domain sections. Either condition triggers onboarding.
 
-The Local North Star is tactical and founder-controlled. The compiled `north-star.story` in `docs/internal/north-star.md` is the strategic layer — it regenerates from collective memory when new memories are committed.
+**Phase 1 — Orient**: Tell the user their collective memory is empty and frame the session: "Your collective memory is starting fresh. This first session is about seeding knowledge — not writing code. I'll help you create your first few memories so AI across your org has real context to work from."
+
+**Phase 2 — Inventory**: Scan the repo for existing source material. Check for README, docs/, architecture decision records, package manifests, and .github templates. List what you found and ask: "Which of these should I digest first?" Also ask about external sources: call transcripts, voice memos, Notion/Confluence exports, strategy docs, or PRDs.
+
+**Phase 3 — Guided Ingestion**: Process found material in priority order: (1) vision/mission/what-is-this-project, (2) architecture and key decisions, (3) current priorities, (4) team structure, (5) recent decisions. For each, draft a memory with full provenance, present it for review, and save on approval. Use the branch `onboarding/first-memories` unless the user specifies otherwise — confirm once, then reuse for all memories in the session.
+
+**Phase 4 — Gap Interview**: After initial ingestion, run `aswritten/introspect`. Ask targeted questions about the highest-value gaps. Start with: "What is this project? What problem does it solve? Who is it for?" Then: "What are the biggest decisions you've made recently? What's still under debate?" Offer voice memo prompts as alternatives: "If typing is slow, record a 10-minute voice memo about why you started this and what you're solving. Paste the transcript here."
+
+**Phase 5 — Graduate**: Recompile the worldview and show the user what it looks like now. Explain the ongoing loop: save memories as you work, review PRs to see how the worldview shifts, query the worldview from any AI tool. Set the expectation: "As your graph grows, my questions get sharper and my context gets deeper." Exit onboarding mode.
+
+Onboarding mode exits when the worldview has 3+ memories ingested and 2+ domains populated. After exit, proceed to the normal Session Start flow.
 
 ## Before You Code: Introspect
 
@@ -127,81 +133,11 @@ Contradictions are fine if intentional. Memories can have multiple focuses.
 
 Call `aswritten/remember` → returns commit SHA, triggers async extraction (5-10 min).
 
-## Context Window Management
-
-Sessions on complex tasks (workflow edits, graph analysis, multi-file refactors) will hit context limits. When autocompact fires, in-flight working state is lost.
-
-- **At ~60% context usage**: Write progress notes to the relevant backlog task via `task_edit` with `notesAppend`. Include: what's done, what's pending, which files changed, key decisions made.
-- **Before any multi-step workflow edit**: Note the approach in the backlog task FIRST, then execute.
-- **Editing workflow JSON**: The jsCode inside workflow JSON is a single escaped string. The Edit tool cannot match patterns inside it. Use Python scripts (`json.load` → modify code string → `json.dump`) to programmatically edit JavaScript within workflow JSON.
-- **At ~75% context or when user says "retro"**: Run a session retrospective before closing out. Cover:
-  1. **What worked well** — tool choices, task ordering, subagent usage, patterns that saved time
-  2. **What didn't work** — wasted context, dead ends, wrong tool for the job, corrections from user
-  3. **Proposed CLAUDE.md additions** — concrete prompt text for new instructions that would have prevented the problems or codified the wins. Present as diffs the user can approve.
-  4. **Next session handoff** — verify task notes are current, acceptance criteria checked, all changes committed and pushed
-
-## Spec-First Development
-
-Every change requires a spec. If you're working from an existing spec, execute it. If no spec exists, writing one is the first task — not coding.
-
-A spec covers three levels:
-
-1. **Local** — What exactly changes and why. The files, the diff, the rationale for this approach over alternatives.
-2. **Domain** — How the change fits into its subsystem. What else it touches, what assumptions it depends on, what it might break. Name the adjacent components.
-3. **System** — The architectural implication. Does this set a precedent? Shift a pattern? Affect cost, performance, or consistency across the codebase?
-
-If you cannot articulate all three levels, you do not understand the change well enough to make it.
-
-Do not treat "small" changes as exempt. A one-line model swap is a decision about model selection strategy, eval baselines, prompt compatibility, and cost. The spec makes that visible.
-
-Write the spec in the backlog task. If no task exists, create one. The spec persists — it is not a chat-level proposal that disappears on session end.
-
 ## Tool Protocol
 
 - **Before calls**: State purpose briefly
 - **After calls**: Validate results; self-correct once
 - **Thread dependencies**: Compile before introspect if stale
-
-## Editing n8n Workflows
-
-When modifying workflow JSON files in `workflows/`:
-
-1. **Always bump `versionId`** - Generate a new UUID (`uuidgen`) and update the `versionId` field. The n8n instance only pulls changes when versionId changes.
-2. **Commit the versionId change** - Include it in the same commit as your workflow edits.
-
-Without a new versionId, the n8n instance will not pick up your changes.
-
-### Deploying Workflow Changes to n8n
-
-After committing and pushing workflow JSON changes, they must be pulled and published in n8n:
-
-1. **Push first**: Before pulling, click "Push" (bottom-left toolbar) to check for uncommitted local n8n changes. Commit any local changes to avoid losing them — "Pull and override" will wipe unpushed edits.
-2. **Pull**: Click "Pull" (bottom-left toolbar). A dialog shows all modified workflows with their versionIds.
-3. **Open each changed workflow**: Open each workflow link from the pull dialog in a separate tab before pulling.
-4. **Pull and override**: Click "Pull and override" to import all changes.
-5. **Refresh tabs**: After pull completes, refresh each workflow tab (pages must be refreshed to display the updated workflow).
-6. **Publish each workflow**: Each pulled workflow shows an orange "Publish" button (top-right). Click it, confirm the version name, and publish. Workflows that were already active will auto-publish on pull; sub-workflows (called by other workflows, not triggered directly) need manual publish.
-
-The pull is global — it pulls all changed workflows at once. Publishing is per-workflow.
-
-**n8n URL**: `https://n8n.aswritten.ai`
-**Source control**: n8n syncs with the `workflows/` directory in this repo via git source control integration.
-
-## Backlog and Task Management
-
-Tasks span all domains: `product`, `infra`, `content`, `demo`, `beta`, `network`, `fundraise`, `sales`, `legal`. Use the Backlog.md MCP tools for all task operations.
-
-- **Check priorities**: Read the Local North Star document (doc-001)
-- **Filter by domain**: Use `task_list` with label filters
-- **Create tasks**: Always assign a domain label and priority
-- **Cross-domain awareness**: When completing a task, check if it unblocks tasks in other domains
-
-Check BACKLOG.md for workflow instructions. Check AGENTS.md for coordination protocols.
-
-Collective memory lives in `.aswritten/`:
-- `memories/*.md` - Source documents
-- `tx/*.sparql` - RDF transactions
-- Snapshots compile on push via GitHub Actions
 
 ## Citation Format
 
