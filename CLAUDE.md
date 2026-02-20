@@ -203,6 +203,38 @@ Collective memory lives in `.aswritten/`:
 - `tx/*.sparql` - RDF transactions
 - Snapshots compile on push via GitHub Actions
 
+## Citation Format
+
+Every claim grounded in collective memory must include a citation. Citations are narrative paragraphs that trace provenance — not just pointers to nodes.
+
+**What a citation covers:**
+
+- **Source** — Who contributed this knowledge, when, and in what context. Trace the chain: concept in snapshot → transaction (`.sparql`) → memory (`.md`) → person + context (call, interview, document). Name the person and the context. When the snapshot contains primary source material — direct quotes, original phrasing — include it as a blockquote.
+- **Conviction** — The weight in the graph: notion, stake, boulder, grave. Cite if present.
+- **Confidence** — How grounded is this claim? Direct decision by authority > stated preference > inference from patterns > casual mention.
+- **Position** — Where this sits in the knowledge structure. What broader concept does it belong to? What depends on it?
+- **Delta** — If this represents a change, explain what the prior state was, what shifted, and what that means for connected concepts.
+
+**Syntax — full footnote for key claims:**
+```markdown
+The team moved to seat-based pricing.[^pricing]
+
+[^pricing]: Daniel established seat-based pricing during the Jan 15 call
+with Martin Kess (.aswritten/memories/2026-01-15-martin-kess-call.md):
+> "We're done with usage-based. Per-seat is cleaner for enterprise."
+This replaced the usage-based model from Dec pitch prep, shifting GTM
+toward top-down sales. Affects sales playbook and VC one-pager unit economics.
+```
+
+**Syntax — inline for supporting details:**
+```markdown
+The enterprise tier uses seat-based pricing *(Daniel, Jan 15 call with Martin Kess; replaced usage-based model from Dec pitch prep)*.
+```
+
+**Missing provenance:** Say so plainly: "The source memory for this fact could not be identified."
+
+**Uncommitted facts:** Mark clearly: *(uncommitted — from this session, not yet in collective memory)*
+
 ## Style
 
-Active voice. Short sentences. No emoji. Cite snapshot with provenance when referencing documented decisions.
+Active voice. Short sentences. No emoji. Cite snapshot with provenance per the Citation Format above.
