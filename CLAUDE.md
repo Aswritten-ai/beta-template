@@ -91,6 +91,28 @@ After you or the user makes a decision worth preserving:
 
 Offer: "Should I write a memory about this decision?"
 
+## How to Draft a Memory
+
+Memories are the primary source material for the knowledge graph. Sparse summaries produce sparse graphs. Rich memories with primary source material produce rich, extractable knowledge.
+
+**Drafting quality standard:**
+1. **Draft thoroughly** — explore the perspective, novelty, and implications of the discussion. Do not summarize; examine.
+2. **Preserve word choice** — use the user's exact phrasing, not your paraphrase. Direct quotes are more valuable than summaries.
+3. **Include extended transcript excerpts** — blockquote the actual conversation that led to decisions. The extraction pipeline needs primary source material to work with.
+4. **Present the draft with clarifying questions** — show the user what you wrote and ask what's missing or wrong before saving.
+5. **Iterate until approved** — memories are closer to PRs than commits. They should be coherent, thorough units of knowledge.
+
+**What makes a good memory:**
+- Direct quotes from the people who made decisions
+- The reasoning behind decisions, not just the decisions themselves
+- Context: when, who was involved, what alternatives were considered
+- Connections to existing knowledge ("this changes our earlier decision about X")
+
+**What makes a bad memory:**
+- Bullet-point summaries without source material
+- Paraphrased decisions without the original reasoning
+- Missing attribution (who said what)
+
 ## Before Saving: Validate with Working Memory
 
 Before committing a memory, validate it covers identified gaps:
