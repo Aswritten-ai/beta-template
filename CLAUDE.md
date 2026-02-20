@@ -51,13 +51,35 @@ This prevents: "Why did you change X?" / "I didn't know Y was intentional."
 
 ## Layer Selection (aswritten/compile)
 
-- `tier1` (~3-4K tokens): Structured markdown worldview index. **Use this for session bootstrap.** Contains mission, vision, positioning, settled claims, open stakes, actors, key narratives, and domain map. Start every session here, then escalate to Turtle layers only if raw graph access is needed.
-- `layer0Only` (~20K tokens): Core narrative as Turtle RDF. Mission, positioning, key actors, stakes, style.
-- `layer0Plus1` (~60K tokens): Cumulative — layer0 + high-value nodes (3+ references, rich content). Q&A, planning.
-- `layer0Plus1Plus2` (~60K tokens): Cumulative — all domain content with full attribution. Content generation.
-- `layer0Plus1Plus2Plus3` (~63K tokens): Cumulative — full graph as TriG with named graphs per transaction. Use `aswritten/introspect` instead of querying directly.
+Two tracks serve two consumers: markdown for LLMs, TriG for machines.
 
-Layers are cumulative: each includes everything from the layers below it. The naming makes this explicit (layer0Plus1 = layer0 + layer1).
+### Track A: Markdown (for LLMs)
+
+- `worldview` (~4-8K tokens): Structured markdown with provenance. Mission, vision, positioning, settled claims, open stakes, actors, key narratives, domain summaries. Every claim includes `source: [Actor] via [Memory]`. **Use this for session bootstrap, Q&A, interview context.**
+- `worldview:{domain}` (~15-25K per domain): Full domain expansion. All entities with verbatim content, conviction levels, source attribution, relationships with labels, cross-domain edges. Domains: Opportunity, Strategy, Product, Architecture, Organization, Proof, Style. Use `worldview:all` for all domains. **Use for content generation, domain deep-dives.**
+
+### Track B: TriG (for machines)
+
+- `graph:core` (~20K tokens): Core concepts + high-value nodes in TriG with named graphs per transaction. **Use for focused structural analysis.**
+- `graph` (~63K tokens): Complete graph in TriG with named graphs per transaction. **Use for RDF extraction, before/after diff, full structural analysis.**
+
+### Routing Guide
+
+| Task | Layer |
+|------|-------|
+| Session bootstrap | `worldview` |
+| General conversation, Q&A | `worldview` |
+| Interview context | `worldview` |
+| Content generation (story draft) | `worldview` + `worldview:{relevant domains}` |
+| Domain deep-dive | `worldview:{domain}` |
+| RDF extraction (memory/injest) | `graph` |
+| Before/after diff (tx/resolve) | `graph` |
+| Full structural analysis | `graph` |
+| Focused structural analysis | `graph:core` |
+
+### Backward Compatibility
+
+Old layer names still work but are deprecated: `tier1` and `layer0Only` map to `worldview`, `layer0Plus1Plus2Plus3` maps to `graph`. The Select Layer node returns a deprecation warning when old names are used.
 
 ## When to Save Memories
 
@@ -96,15 +118,21 @@ Sessions on complex tasks (workflow edits, graph analysis, multi-file refactors)
   3. **Proposed CLAUDE.md additions** — concrete prompt text for new instructions that would have prevented the problems or codified the wins. Present as diffs the user can approve.
   4. **Next session handoff** — verify task notes are current, acceptance criteria checked, all changes committed and pushed
 
-## Before Implementing: Propose the Architecture
+## Spec-First Development
 
-Before writing code or editing workflows, propose the change architecture to the user. Even for "obvious" fixes:
+Every change requires a spec. If you're working from an existing spec, execute it. If no spec exists, writing one is the first task — not coding.
 
-1. **State the change** — what files, what nodes, what the diff looks like
-2. **State the approach** — why this path over alternatives. Prefer modifying existing nodes/parameters over adding new ones. Prefer reusable patterns over one-off solutions.
-3. **Wait for approval** — the user may see a simpler path or want a different abstraction
+A spec covers three levels:
 
-Do not skip this for "small" changes. Small changes compound into architecture. Every implementation choice is a design decision.
+1. **Local** — What exactly changes and why. The files, the diff, the rationale for this approach over alternatives.
+2. **Domain** — How the change fits into its subsystem. What else it touches, what assumptions it depends on, what it might break. Name the adjacent components.
+3. **System** — The architectural implication. Does this set a precedent? Shift a pattern? Affect cost, performance, or consistency across the codebase?
+
+If you cannot articulate all three levels, you do not understand the change well enough to make it.
+
+Do not treat "small" changes as exempt. A one-line model swap is a decision about model selection strategy, eval baselines, prompt compatibility, and cost. The spec makes that visible.
+
+Write the spec in the backlog task. If no task exists, create one. The spec persists — it is not a chat-level proposal that disappears on session end.
 
 ## Tool Protocol
 
