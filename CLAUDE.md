@@ -1,10 +1,16 @@
 # CLAUDE.md: Collective Memory for Claude Code
 
-You are a coding agent backed by your org's collective memory via aswritten.ai. The compiled snapshot IS your understanding of this codebase's architecture, decisions, and patterns—without it, you're guessing.
+You are a coding agent backed by your org's collective memory via aswritten.ai. The compiled snapshot is your organizational worldview — decisions, strategy, rationale, and context that the code alone can't tell you.
+
+## Memory Policy
+
+- **Snapshot** = canonical truth. Cite it. Don't contradict it.
+- **Session** = provisional. Mark as "uncommitted" until saved.
+- **Conflicts**: Prefer snapshot; flag contradictions; offer to update via `aswritten/remember`.
 
 ## Onboarding Mode
 
-Before checking the North Star, compile the worldview (`aswritten/compile` with `layer=worldview`). If the output contains no claims, no actors, and no domain sections, the graph is empty or sparse. Enter onboarding mode instead of the normal session flow.
+At session start, compile the worldview (`aswritten/compile` with `layer=worldview`). If the output contains no claims, no actors, and no domain sections, the graph is empty or sparse. Enter onboarding mode instead of the normal session flow.
 
 **Detection**: An empty worldview has headers only — `# Worldview` and `## Identity` with no populated subsections. A sparse worldview has fewer than 2 domain sections. Either condition triggers onboarding.
 
@@ -18,19 +24,54 @@ Before checking the North Star, compile the worldview (`aswritten/compile` with 
 
 **Phase 5 — Graduate**: Recompile the worldview and show the user what it looks like now. Explain the ongoing loop: save memories as you work, review PRs to see how the worldview shifts, query the worldview from any AI tool. Set the expectation: "As your graph grows, my questions get sharper and my context gets deeper." Exit onboarding mode.
 
-Onboarding mode exits when the worldview has 3+ memories ingested and 2+ domains populated. After exit, proceed to the normal Session Start flow.
+Onboarding mode exits when the worldview has 3+ memories ingested and 2+ domains populated.
 
-## Before You Code: Introspect
+## Session Start
 
-When the user asks you to implement, fix, or plan anything:
+At session start, compile the worldview (`aswritten/compile` with `layer=worldview`). If the graph is empty or sparse, enter onboarding mode above. Otherwise, use the worldview to ground all responses for the session.
 
-1. **Introspect the domain**: Call `aswritten/introspect` with `focus` = the technical area (e.g., "authentication", "API design", "deployment")
-2. **Check what's documented**: Architecture decisions? Code patterns? Dependencies rationale?
+Recompile when:
+- After a successful `remember` and the extraction pipeline completes (check `injest-memories` action status)
+- When the user switches branches or repos
+- When the user requests a refresh
+
+Cache the snapshot for the session. Don't recompile redundantly.
+
+## Branch Management
+
+All aswritten tools accept a `ref` parameter (git branch).
+
+- **Never write to `main`** — commits will be rejected. Always use a topic branch.
+- **Reading from `main` is fine** — compile and introspect can read the canonical worldview.
+- **Session consistency** — once a branch is established, use it for all tool calls unless the user explicitly switches.
+- **Confirm before writing** — always confirm the branch with the user before calling `remember`.
+
+Branch naming: `call/{name}`, `research/{topic}`, `feature/{name}`, `onboarding/first-memories`.
+
+## Before You Work: Introspect
+
+When the user asks you to work on anything that draws on organizational knowledge — code, content, strategy, analysis, interviews, or process:
+
+1. **Introspect the domain**: Call `aswritten/introspect` with `focus` = the relevant area (e.g., "pricing strategy", "deployment", "onboarding", "sales positioning")
+2. **Check what's documented**: Decisions? Rationale? Constraints? Actors involved?
 3. **If gaps exist**, surface them and ask who knows:
-   > "I can see the auth module structure, but the decision to use JWT over sessions isn't documented. **Who made this decision?** If we write what we know to collective memory, I can plan with full context."
+   > "I can see the pricing decision, but the rationale for seat-based over usage-based isn't documented. **Who made this decision?** If we write what we know to collective memory, I can work with full context."
    - If user answers directly: continue introspecting, expand context iteratively, offer to save a memory
    - If user delegates to an expert: prompt them to have that person write their knowledge to collective memory
-4. **If coverage is good**: Plan and implement with confidence, citing the documented decisions
+4. **If coverage is good**: Proceed with confidence, citing the documented decisions
+
+### Introspection Modes
+
+- **`analysis`** — graph health metrics, coverage by domain, structural issues. Use when assessing what's documented.
+- **`interview`** — gaps formatted as questions for knowledge extraction. Use when preparing to fill gaps with a person.
+- **`working_memory`** — add the `working_memory` parameter with a draft to evaluate coverage against identified gaps. Use before saving a memory.
+
+Key outputs to act on:
+- `coverage.sparse` — domains with thin knowledge (these block informed work)
+- `focus_analysis.gaps` — specific missing areas with severity
+- `focus_analysis.suggested_questions` — what to ask experts to fill gaps
+
+Keep `focus` and `session_context` stable across calls unless the domain actually shifts.
 
 ## The Feedback Loop
 
@@ -48,12 +89,6 @@ You recompile → Implement with full context
 ```
 
 This prevents: "Why did you change X?" / "I didn't know Y was intentional."
-
-## Memory Policy
-
-- **Snapshot** = canonical truth. Cite it. Don't contradict it.
-- **Session** = provisional. Mark as "uncommitted" until saved.
-- **Conflicts**: Prefer snapshot; flag contradictions; offer to update via `aswritten/remember`.
 
 ## Layer Selection (aswritten/compile)
 
@@ -86,6 +121,21 @@ Two tracks serve two consumers: markdown for LLMs, TriG for machines.
 ### Backward Compatibility
 
 Old layer names still work but are deprecated: `tier1` and `layer0Only` map to `worldview`, `layer0Plus1Plus2Plus3` maps to `graph`. The Select Layer node returns a deprecation warning when old names are used.
+
+## Content Generation
+
+Before generating content, call `stories` to find the right template. Each template specifies its compile layer, audience, and destination. Compile at the template's specified layer and draft content grounded in the worldview. Story drafting currently runs through the backend pipeline during PR review, not via MCP.
+
+## Ingestion Pipeline
+
+When a memory is saved via `remember`:
+
+1. Memory committed to `.aswritten/memories/` on the specified branch
+2. GitHub Actions (`injest-memories.yml`) triggers: extract → diff → transact → validate → commit SPARQL to `.aswritten/tx/`
+3. `draft-stories.yml` regenerates stories from the updated worldview
+4. PR diff shows the worldview shift — which memories triggered changes, how stories updated
+
+This takes 5-10 minutes. The pipeline runs on the backend; the MCP tools are read-only by design.
 
 ## When to Save Memories
 
@@ -133,11 +183,16 @@ Contradictions are fine if intentional. Memories can have multiple focuses.
 
 Call `aswritten/remember` → returns commit SHA, triggers async extraction (5-10 min).
 
-## Tool Protocol
+## Conviction Levels
 
-- **Before calls**: State purpose briefly
-- **After calls**: Validate results; self-correct once
-- **Thread dependencies**: Compile before introspect if stale
+The knowledge graph tracks how settled each claim is. Four levels, from most moveable to least:
+
+- **Notion** — emerging idea, easily moved. First mention, casual observation, untested hypothesis.
+- **Stake** — planted position, needs validation. Someone committed to this view but it's moveable with evidence.
+- **Boulder** — settled, hard to move. Requires significant counter-evidence from multiple sources to shift.
+- **Foundation** — bedrock. Career-arc level conviction, practically immovable. The deepest commitments.
+
+Conviction is orthogonal to review status. A boulder-level claim can still be provisionally extracted (unreviewed). Conviction tracks how settled the *knowledge* is; review tracks whether the *extraction* has been validated.
 
 ## Citation Format
 
@@ -146,7 +201,7 @@ Every claim grounded in collective memory must include a citation. Citations are
 **What a citation covers:**
 
 - **Source** — Who contributed this knowledge, when, and in what context. Trace the chain: concept in snapshot → transaction (`.sparql`) → memory (`.md`) → person + context (call, interview, document). Name the person and the context. When the snapshot contains primary source material — direct quotes, original phrasing — include it as a blockquote.
-- **Conviction** — The weight in the graph: notion, stake, boulder, grave. Cite if present.
+- **Conviction** — The weight in the graph: notion, stake, boulder, foundation. Cite if present.
 - **Confidence** — How grounded is this claim? Direct decision by authority > stated preference > inference from patterns > casual mention.
 - **Position** — Where this sits in the knowledge structure. What broader concept does it belong to? What depends on it?
 - **Delta** — If this represents a change, explain what the prior state was, what shifted, and what that means for connected concepts.
