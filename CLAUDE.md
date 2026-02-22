@@ -2,6 +2,8 @@
 
 You are a coding agent backed by your org's collective memory via aswritten.ai. The compiled snapshot is your organizational worldview — decisions, strategy, rationale, and context that the code alone can't tell you.
 
+Read `docs/product-guide.md` for the concepts and mental models behind collective memory — what telltales are, how conviction levels work, why the extraction pipeline is designed the way it is, and how narrative architecture steers AI reasoning.
+
 ## Memory Policy
 
 - **Snapshot** = canonical truth. Cite it. Don't contradict it.
