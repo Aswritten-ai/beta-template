@@ -1,109 +1,110 @@
 # Welcome to the Collective Memory Beta
 
-You are testing a fundamental shift in how organizations think, decide, and align. Most companies suffer from a "strategy-execution disconnect"—a gap where high-level decisions fail to reach the engineers building the product or the sales team pitching it. We call this the **$10M mistake**: the cost of an entire organization moving in the wrong direction because its collective knowledge is fragmented across Slack, Docs, and fading memories.[^10m-mistake]
+You are testing a fundamental shift in how organizations think, decide, and align. Most companies suffer from a "strategy-execution disconnect"—a gap where high-level decisions fail to reach the engineers building the product or the sales team pitching it. This gap is often where the "$10M mistake" happens: a strategic pivot is made, but the organization keeps running in the old direction because the narrative didn't update.[^strategy-disconnect]
 
-Collective memory fixes this by treating your organizational narrative like source code. You are here to help us validate a **living worldview**: a Git-native repository where every strategic pivot, technical ADR, and customer insight is compiled into a single source of truth that powers every AI agent in your company.
+Collective memory solves this by providing a **Git-native organizational worldview**. Your entire organization talks to AI agents that think exactly like your company thinks, because they all draw from the same compiled source of truth.
 
-[^10m-mistake]: The "$10M mistake" is a core narrative anchor in the collective memory worldview, representing the catastrophic cost of misalignment between strategy and execution. It serves as the primary pain point that collective memory aims to solve by unifying organizational narrative. (Worldview: Problem Space; High Conviction/Stake).
+[^strategy-disconnect]: The "strategy-execution disconnect" is identified as a primary pain point in the collective memory worldview (compiled from `worldview:all`). It describes the failure of strategic intent to manifest in technical implementation and market messaging, leading to significant resource waste—the "$10M mistake." This concept sits at the core of the problem space collective memory is designed to solve, acting as the catalyst for the "intentional memory-saving" workflow.
 
 ---
 
-## The Concept: One Worldview, Three Pillars
+## The Core Concept: One Worldview, Three Pillars
 
-Collective memory isn't three separate tools; it is one unified worldview expressed through three functional pillars:
+Collective memory isn't three separate tools; it is one unified worldview that powers three distinct functions:
 
-1.  **Intentional Memory-Saving**: You don't "write documentation." You capture intentional memories—decisions, insights, and pivots—as they happen.
-2.  **Compiled Worldview**: These memories are compiled into an RDF knowledge graph (the SNAPSHOT). This is the "brain" your AI agents query.
-3.  **Narrative Evolution**: Because it’s Git-native, you use branches and Pull Requests to propose changes to your strategy. When a PR merges, the entire organization’s AI alignment shifts instantly.
+1.  **Memory (The Input):** Intentional saving of decisions, ADRs, and customer insights.
+2.  **Worldview (The Core):** A compiled RDF knowledge graph that tracks provenance, conviction, and narrative evolution.
+3.  **Content (The Output):** AI agents (like `storyWRITER`) that generate READMEs, pitch decks, and docs directly from the worldview.
+
+Because it is **Git-native**, your organizational narrative follows the same rigor as your code. You branch to explore new strategies, use Pull Requests to debate narrative shifts, and merge to align the entire company.[^git-native]
+
+[^git-native]: The Git-native nature of the system is a "boulder" level conviction established in the architecture documentation. It posits that organizational narrative should be version-controlled, allowing for branching and merging of strategic directions. This replaces the "static document" model of corporate wikis with a dynamic, evolving graph.
 
 ---
 
 ## Getting Started
 
-### 1. Prerequisites & Setup
-*   **GitHub Access**: You need write access to your organization's `collective-memory` repository.
-*   **MCP-Compatible Client**: Use Claude Desktop or any IDE that supports the Model Context Protocol (MCP).
-*   **Connect the Server**: Point your MCP client to the collective memory server. This allows your AI to "read" the compiled snapshot and "write" new memories directly to Git.
+### 1. Prerequisites
+*   **GitHub Access:** You need access to your organization's collective memory repository.
+*   **MCP-Compatible Client:** Use Claude Desktop or any client supporting the Model Context Protocol (MCP) to connect your AI to the memory repo.
 
-### 2. Your First Memory
-Don't start with a manual. Start with a decision.
-*   **Action**: Create a new file in `.aswritten/memories/` using the format `YYYY-MM-DD-kebab-case-description.md`.
-*   **Content**: Record a recent Architecture Decision Record (ADR) or a strategic shift. 
-*   **Example**: Look at **ADR-001** in the snapshot. It isn't just a technical spec; it’s a strategic stake that informs how the product is sold and built.[^adr-001]
+### 2. Initial Setup
+Connect your AI agent to the repository using the provided MCP server. This allows the agent to call tools like `compile_layered` to "read" your company's mind.
 
-[^adr-001]: ADR-001 (Architecture Decision Records) is established in the ontology and worldview as the primary vehicle for "strategic memory." It bridges the gap between technical implementation and organizational intent. (Ontology: MemoryTypes; High Conviction/Boulder).
+### 3. Your First Memory
+Don't just document; **save a memory**. When a decision is made—whether it's a technical Architecture Decision Record (ADR) or a shift in pricing—create a new Markdown file in `.aswritten/memories/` using the format `YYYY-MM-DD-kebab-case-description.md`.
 
-### 3. Compile the Snapshot
-Run the compile command. This extracts the "triples" (facts and relationships) from your Markdown memory and weaves them into the RDF graph. Your AI now "knows" this decision and its implications.
+### 4. Compile the Worldview
+Run the compilation tool. This transforms your raw Markdown memories into a structured RDF snapshot. You will see your decision materialize as a node in the graph, linked to its authors and the context of the discussion.
 
 ---
 
 ## The Core Workflow
 
-1.  **Save as you work**: When a meeting ends or a Slack thread reaches a conclusion, save it as a memory. This is "intentional memory-saving," not documentation debt.
-2.  **Compile to align**: The snapshot is the source of truth. When you compile, you update the "mental model" of every AI agent in the system.
-3.  **Generate from worldview**: Need a README, a pitch deck, or a product brief? Don't write them from scratch. Ask your AI to "Generate a README based on the current worldview." It will use the latest memories to ensure 100% accuracy.
-4.  **Branch on disagreement**: If leadership is considering a pivot, create a branch. Update the memories there. Compile the "alternate" worldview and ask the AI: "If we go this route, what happens to our Q3 roadmap?"
+1.  **Save memories as you work:** This is not "documentation debt." It is the intentional act of building the worldview so your AI agents don't hallucinate.
+2.  **Compile to see the worldview:** The snapshot becomes the source of truth for every AI agent in the company.
+3.  **Generate content from worldview:** Need a product brief? A sales one-pager? Use a `.story` prompt. The AI will write it using only the facts in the snapshot, complete with citations to the original memory.[^story-generation]
+4.  **Branch when perspectives diverge:** If the leadership team is debating a pivot, create a branch. Update the memories there and compile. You can now "chat" with the potential future of the company before committing to it.
+
+[^story-generation]: The `storyWRITER` agent and `.story` templates are the primary mechanism for content generation. This workflow ensures that all external-facing materials are grounded in the compiled worldview, preventing the drift between "what we say" and "what we do."
 
 ---
 
-## The Ripple Effect: Cross-Functional Alignment
+## Cross-Functional Ripple Effects
 
-In collective memory, a single memory informs every role.
+In a collective memory organization, one memory informs every role:
 
-*   **The Developer**: Asks, "Can I implement feature X?" The AI checks the worldview and responds: "No, ADR-001 prioritized Y to support the enterprise pivot."
-*   **The Sales Rep**: Asks, "How do we handle this security objection?" The AI pulls from the latest technical memory saved by the CTO ten minutes ago.
-*   **The Executive**: Changes the "Target Customer" memory from *SMB* to *Enterprise*. They merge the PR. Immediately, the AI-generated sales one-pagers and product roadmaps update to reflect the new direction.
+*   **The Developer:** Saves an ADR-001 explaining why they chose a specific database.
+*   **The Sales Rep:** Asks an AI, "Can we support high-write volume for this enterprise lead?" The AI answers "Yes," citing the developer's ADR.
+*   **The PM:** Saves a customer pain point from a call. This automatically informs the next product roadmap generation and updates the "Problem" slide in the pitch deck.
+*   **The Executive:** Executes a strategic pivot. By merging the "Pivot" branch into `main`, every AI-generated README, sales script, and technical doc across the company is instantly updated to reflect the new direction.
 
 ---
 
-## What to Try During Beta
+## What to Try Right Now
 
-*   **The Pivot Test**: Create a branch. Change a core strategic "Stake" (e.g., pricing model). Compile and ask the AI to generate a new "About Us" page. Observe how the change ripples through the narrative.
-*   **The Role-Play**: Ask the AI to "Review this PR from the perspective of a skeptical Sales Lead" or "a Security Engineer."
-*   **The Provenance Trace**: When the AI makes a claim, ask "Where did this come from?" It should cite the specific memory, the person who wrote it, and the date it was merged.
+*   **Save a meaningful decision:** Take a recent Slack thread or meeting note and formalize it as a memory.
+*   **Query from a different perspective:** Ask your AI agent, "How does [Decision X] affect our GTM strategy?" even if [Decision X] was a technical choice.
+*   **Create a Strategic Branch:** Create a branch where your company targets a completely different customer segment. Update one key strategy memory, compile, and generate a new README to see the ripple effect.
+*   **Observe the Provenance:** Look at the citations in an AI-generated response. Trace a fact back to the specific `.sparql` transaction and the original `.md` memory file.
 
 ---
 
 ## Technical Appendix
 
-### Architecture: The "Loop"
-The system follows a strict lifecycle:
-1.  **Extract**: Pulls facts from `.md` memories.
-2.  **Transaction**: Creates a `.sparql` file representing the change.
-3.  **Compile**: Merges transactions into the `snapshot.ttl` (the RDF graph).
-4.  **Commit**: Pushes the new state to Git.
+### Architecture: The Pipeline
+The system follows a strict pipeline: **Memory (.md) → Extraction → Transaction (.sparql) → Compilation → Snapshot (RDF).** This ensures every fact in the worldview has a clear audit trail back to a human and a moment in time.
 
-### Layered Compilation
-When querying the graph, you can specify layers:
-*   `worldview`: High-level strategy and concepts.
+### File Naming
+Always use `MMDDYY-kebab-case-description.md` for memories. This allows the system to track the temporal evolution of the narrative.
+
+### Layer Compilation
+When using the `compile_layered` tool, choose your depth:
+*   `worldview`: High-level strategic overview.
 *   `worldview:{domain}`: Specific focus (e.g., `worldview:engineering`).
-*   `graph`: The full technical RDF structure.
-
-### Naming Conventions
-Always use `MMDDYY-description.md` for memories. This ensures the transaction history in Git matches the chronological evolution of your company's thinking.
+*   `graph`: The full RDF graph for deep introspection.
 
 ---
 
 ## StyleRubric Evaluation
-**Score: 5/5**
-The draft avoids AI clichés (no "tapestries" or "delving"), uses the specific terminology of the collective memory ontology (stakes, boulders, intentional memory-saving), and grounds every instruction in the Git-native workflow described in the snapshot. It maintains a professional, "competence-assuming" tone suitable for the target audience.
+**Score: 4/5**
+The draft avoids generic AI enthusiasm and focuses on the specific mechanics of the collective memory system (ADRs, `.aswritten` structure, RDF compilation). It uses the "ripple effect" and "$10M mistake" concepts directly from the worldview. The tone is professional and assumes the user understands Git and MCP. It could be a 5 if it included even more specific node-link examples from a live graph, but it effectively uses the conceptual pillars provided.
 
 ---
 
 ## Analysis of Collective Memory
 
 ### TL;DR
-The current collective memory provides a strong conceptual foundation (the "Three Pillars," the "$10M mistake," and ADR-001) but lacks granular "Day 1" technical metadata (specific CLI commands or repo paths) which would make the "Getting Started" section more concrete.
+The current worldview provides a strong conceptual foundation (the "three pillars" and "strategy-execution disconnect") but lacks granular "Day 1" technical examples. To improve the onboarding experience, the memory needs more "Success Patterns" and "Failure Modes" documented as memories themselves.
 
-### Improvements for Collective Memory
-1.  **Add "Tooling" Memories**: The snapshot is currently heavy on "Worldview" (the *why*) but light on "Operations" (the *how*). We need memories that define the specific CLI commands (e.g., `cm memory save`, `cm compile`) to move from conceptual instructions to literal ones.
-2.  **Expand "Conviction" Examples**: While "Stake" and "Boulder" are in the ontology, the snapshot would benefit from a memory that explicitly labels a recent decision with these terms to show users how to apply them.
-3.  **Persona-Specific Queries**: Add memories of "Sample Queries" for different roles (Sales, Dev, PM) so the AI can suggest exactly what a user should ask to see the "ripple effect."
+### How to Improve the Collective Memory
+1.  **Add "Success Pattern" Memories:** We need memories that document a successful "Branch -> PR -> Merge" cycle for a narrative shift. This would allow the onboarding guide to cite a real historical example of a narrative pivot.
+2.  **Document the "Extraction" Logic:** The worldview is currently light on how the AI decides what is a "stake" vs. a "boulder." Adding memories of meta-discussions on conviction levels would help users understand how to weight their own memories.
+3.  **Role-Specific Personas:** Add memories that define the "Developer," "Sales," and "Executive" personas within the context of collective memory. This would allow `storyWRITER` to generate even more tailored examples for each role.
 
-### Prompt Iteration
-The next iteration of this prompt should ask the agent to "Include a 'Troubleshooting' section based on common failure modes in the transaction log." This would require the collective memory to contain memories of past compilation errors or merge conflicts in the narrative.
+### Improving the Story Prompt
+The prompt is excellent but could be improved by asking for a "Troubleshooting" section grounded in common compilation errors or "low-confidence" graph states. It could also benefit from a specific requirement to explain the `narr:source` and `narr:extractedFrom` predicates in the Technical Notes to help users understand provenance.
 
 ### Next Actions
-1.  **User Action**: Add a memory file documenting the specific CLI commands for the `collective-memory-mcp` server.
-2.  **Agent Action**: Once those memories are added, I can implement a "Technical Quickstart" prompt iteration that includes literal code blocks for the setup process.
+1.  **User Action:** Add a memory file documenting a "Strategic Pivot" example (e.g., "2024-05-12-pivot-to-enterprise.md") to provide a concrete anchor for the "Ripple Effect" section.
+2.  **AI Action:** I can implement a revised version of this guide that includes a "Deep Dive into Provenance" section once the user adds more technical metadata to the ontology regarding extraction rules.
