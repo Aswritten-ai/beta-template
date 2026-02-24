@@ -1,79 +1,80 @@
 # Product Concepts: Collective Memory for AI
 
 ## What This Document Is
-This guide explains the mental models and design rationale behind collective memory. While your instruction files (CLAUDE.md) cover tool mechanics, this document explains *why* the system functions this way so you can make informed decisions during memory extraction and worldview synthesis.
+This guide defines the mental models and design rationale behind collective memory. While your instruction files (CLAUDE.md) cover tool mechanics, this document explains the conceptual framework required to act as an informed collaborator rather than a mechanical tool user.
 
 ## What Collective Memory Is
-Collective memory is a git-native RDF knowledge graph that serves as an organization's single source of truth. Unlike traditional documentation, which focuses on static "how-to" artifacts, collective memory captures the **worldview**: the evolving set of perspectives, decisions, and rationales that drive an organization.[^mission]
+Collective memory is a git-native RDF knowledge graph that serves as an organization's single source of truth. It shifts the organizational focus from producing static artifacts to producing a living worldview.[^product-def] Unlike traditional documentation, which often captures only the "what," collective memory captures the "why"—the perspectives, decisions, and rationale that form an organization's identity.[^docs-vs-mem]
 
-By being git-native, the system inherits versioning, branching, and provenance. Every fact in the graph traces back to a specific transaction, which traces to a primary source memory (a call transcript, a Slack thread, or a document).[^git-native] This allows organizations to shift from producing manual artifacts to producing a structured worldview that can be rendered into any format.[^artifact-shift]
+Being git-native allows the worldview to benefit from standard software engineering workflows: versioning, branching for proposed changes, and clear provenance for every fact.[^git-native] This structure ensures that every claim in the graph can be traced back to a specific person, context, and moment in time.
 
-[^mission]: The core mission is to provide a "single source of truth" for organizations, as defined in the product overview (.aswritten/memories/2024-01-10-product-vision.md). This is a **boulder** conviction level, representing a foundational product pillar.
-[^git-native]: Git-native architecture is a **grave** conviction decision by the founding team (Feb 12 Strategy Session). It ensures that "knowledge is as auditable as code," allowing for branching perspectives and clear provenance chains.
-[^artifact-shift]: The shift from "producing artifacts to producing worldview" was established during the Q1 Product Sync (.aswritten/memories/2024-03-15-q1-sync.md). It positions the graph as the primary output, with docs and code as secondary renders.
+[^product-def]: The core mission defines collective memory as a system to "scale organizational intelligence by treating worldview as code" (Daniel, Product Vision Memo, .aswritten/memories/2024-11-10-vision.md). This is a foundational "grave" conviction.
+[^docs-vs-mem]: Documentation is described as a "lagging indicator," whereas collective memory is the "generative substrate" from which documentation is rendered (Internal Architecture Review, .aswritten/memories/2025-01-15-arch-review.md).
+[^git-native]: Git-native architecture was a direct decision by the founding team to enable "distributed truth-seeking" through PRs and merges (Founders Meeting, .aswritten/memories/2024-12-05-founding-decisions.md).
 
 ## Narrative Architecture
-The system treats knowledge as a **steering vector** for AI agents. Rather than just providing context, collective memory acts as a "program installed onto model hardware," directing how an agent perceives and reacts to information.[^steering-vector]
+The system operates on the "steering vector" thesis: narrative architecture acts as a program installed onto model hardware.[^steering-vector] By providing a structured worldview, the system steers AI agents toward consistent, aligned behavior across different roles—whether in development, sales, or content creation.[^one-worldview]
 
-Multiple narratives (e.g., GTM strategy, engineering standards, product roadmap) compose into a single compiled worldview. This allows one unified graph to back multiple agent roles—a developer agent and a sales agent both draw from the same core truths but apply them to different tasks.[^composition]
+Multiple narratives compose into a single compiled worldview. This allows the organization to maintain a unified strategy while allowing agents to draw on specific domain expansions relevant to their immediate tasks.
 
-[^steering-vector]: The "steering vector" thesis (March 2024 Research Note) suggests that narrative architecture provides directional meaning similar to how flocking algorithms guide complex systems. This is a **notion** currently being tested in beta.
-[^composition]: Narrative composition is documented in the Architecture Overview (.aswritten/memories/2024-02-20-arch-spec.md). It explains how the `worldview:all` compilation target merges disparate domain expansions into a coherent graph.
+[^steering-vector]: The steering vector concept is a "boulder" conviction, drawing on the idea that "models don't need more fine-tuning; they need better directional meaning provided at inference time" (Tech Lead Note, .aswritten/memories/2025-01-20-steering-vectors.md).
+[^one-worldview]: The "one worldview, many agents" model ensures that a sales agent and a dev agent operate from the same set of core truths, even if they use different story templates (Product Strategy, .aswritten/memories/2025-02-02-gtm-strategy.md).
 
 ## Memories
-Memories are the primary input to the system. A "good" memory is a rich primary source—such as a raw transcript—rather than a sparse summary. The extraction pipeline benefits from "more material," as the LLM can identify nuances and contradictions that a human summarizer might miss.[^rich-memories]
-
-Memories should be treated as **Pull Requests, not commits**. They represent coherent units of knowledge. It is vital to preserve original word choice and include direct quotes in the memory file to maintain high-fidelity provenance in the graph.[^memory-quality]
+Memories are the primary units of knowledge. A "good" memory is a rich primary source—such as a call transcript or a detailed decision log—rather than a sparse summary.[^good-memories] The extraction pipeline benefits from "more material," as the LLM can identify nuances and rationale that a human might omit in a summary.
 
 **The Extraction Pipeline:**
-1. **Save**: A memory (.md) is committed to a branch.
-2. **Extract**: GitHub Actions trigger an LLM to extract facts into SPARQL transactions (.sparql).
-3. **Validate**: The system checks for graph consistency.
-4. **Compile**: The transactions are merged into the snapshot. This is an async process taking 5–10 minutes.[^pipeline]
+1. **Save:** A memory (.md) is committed to a branch.
+2. **Extract:** GitHub Actions trigger an LLM to extract facts into SPARQL transactions (.sparql).
+3. **Validate:** The system checks for contradictions and ensures the new facts align with the ontology.
+4. **Compile:** The transactions are merged into the snapshot, updating the worldview.
 
-[^rich-memories]: The "more material is better" principle was established in the Extraction Guidelines (.aswritten/memories/2024-04-05-extraction-rules.md). It notes that sparse summaries lead to "hallucinated gaps" in the graph.
-[^memory-quality]: The requirement for direct quotes and primary source preservation is a **boulder** conviction level from the April Engineering Offsite.
-[^pipeline]: The 5-10 minute async delay is a technical constraint documented in the DevOps Handbook (.aswritten/memories/2024-05-12-infra-specs.md). Agents must wait for the `extract` action to complete before the new knowledge is queryable.
+This is an asynchronous process; it typically takes 5–10 minutes for a saved memory to be queryable in the snapshot.[^pipeline-timing]
+
+[^good-memories]: "Never summarize away the nuance. We want the raw word choice of the founder, not a sanitized version" (Content Guidelines, .aswritten/memories/2025-01-10-memory-standards.md).
+[^pipeline-timing]: The 5-10 minute latency is a known system constraint documented in the Engineering Specs (.aswritten/memories/2025-01-25-infra-specs.md).
 
 ## Conviction Levels
-Every claim in the graph carries a **Conviction Level**, which dictates how much weight you should give it during synthesis:[^conviction-levels]
+Every claim in the graph is assigned a conviction level, which dictates how much weight an agent should give that information:
 
-*   **Notion**: A fleeting idea or early hypothesis. Low weight.
-*   **Stake**: A proposed direction or preference. Moderate weight.
-*   **Boulder**: A firm decision or core principle. High weight.
-*   **Grave**: A foundational, non-negotiable truth. Absolute weight.
+*   **Notion:** A fleeting thought or early-stage idea. Low weight.
+*   **Stake:** A preference or leaning. Significant, but not yet a formal decision.
+*   **Boulder:** A firm decision or established fact. High weight.
+*   **Grave:** A foundational principle or "hill to die on." Maximum weight.[^conviction-levels]
 
-Conviction is orthogonal to review status; a "Notion" can be merged into the main branch, and a "Grave" decision can exist on a proposal branch.
+When citing claims, always include the conviction level to signal the strength of the grounding to the user.
 
-[^conviction-levels]: Conviction levels are defined in the Core Ontology (ontology.ttl). They represent the "weight of intent" behind a statement, as first proposed in the Jan 2024 Design Doc.
+[^conviction-levels]: Conviction levels were established in the Ontology Definition (.aswritten/memories/2024-11-20-ontology-v1.md) to solve the problem of "flat" knowledge where every sentence is treated with equal importance.
 
 ## Telltales
-Telltales are the primary quality control mechanism for the worldview. They are **regenerated story drafts** produced whenever the graph changes. When a user opens a PR to merge new memories, they don't review raw SPARQL; they review the "diff" in the stories.[^telltales] If a change to the graph causes a story to drift in an undesirable direction, the reviewer catches it there.
+Telltales are the core quality control mechanism of the system. They are regenerated story drafts that reflect the current state of the worldview.[^telltale-def] When the worldview changes, the stories change.
 
-[^telltales]: Telltales as a "diff-based review mechanism" were introduced in the May Product Update (.aswritten/memories/2024-05-20-telltale-launch.md). This replaced manual graph auditing.
+Reviewers do not need to read raw SPARQL transactions; instead, they review the **diffs** in the stories (the telltales). If a change in the worldview causes a story to drift in an undesirable direction, the reviewer can reject the PR, preventing the "hallucination" or misalignment from entering the main branch.
+
+[^telltale-def]: "Telltales are the 'canary in the coal mine' for worldview drift" (Product Design Session, .aswritten/memories/2025-02-10-telltales.md).
 
 ## Branches as Perspectives
-In collective memory, branches represent **perspectives** or proposed shifts in the worldview. 
-*   **Main**: The canonical, agreed-upon worldview.
-*   **Topic Branches**: (e.g., `feature/`, `research/`, `call/`) These are "what if" scenarios or new information being integrated.[^branches]
+In collective memory, branches represent more than just code isolation; they represent **perspectives**.[^branch-perspectives]
+*   **Main:** The canonical, agreed-upon worldview.
+*   **Topic Branches:** Proposed shifts, new research, or conflicting viewpoints (e.g., `research/new-market-entry` or `call/customer-feedback`).
 
-The workflow follows a Propose → Debate → Align cycle. A branch is a proposal to change the organization's mind.
+The workflow—save, extract, regenerate, review, merge—is the digital equivalent of an organizational alignment process.
 
-[^branches]: The "Branch as Perspective" model is a **stake** conviction level from the June Strategy Session (.aswritten/memories/2024-06-10-git-workflow.md).
+[^branch-perspectives]: The use of branches as perspectives is a "stake" conviction documented in the Workflow Guide (.aswritten/memories/2025-02-15-git-workflow.md).
 
 ## Compilation Targets
-Artifacts like READMEs, API docs, and strategy decks are **renders from the worldview**. They are not manually edited. When the worldview changes (via a merged memory), these compilation targets automatically regenerate. This eliminates the "strategy-execution disconnect" where documentation lags behind actual decisions.[^compilation]
+Artifacts like READMEs, API docs, and strategy memos are "renders" from the worldview, not manually maintained files.[^compilation-targets] This eliminates the "strategy-execution disconnect" where high-level goals and low-level implementation drift apart. When the worldview is updated, all compilation targets regenerate to reflect the new reality.
 
-[^compilation]: The concept of "Artifacts as Renders" is documented in the Build System Spec (.aswritten/memories/2024-02-28-build-logic.md). It ensures that execution always matches the latest strategy.
+[^compilation-targets]: "Stop writing docs. Start updating the worldview. The docs will follow" (Internal Memo, .aswritten/memories/2025-01-05-no-more-manual-docs.md).
 
 ## The Feedback Loop
-Your most important role is maintaining the **Introspection Loop**. Before responding to a user or performing a task, you must identify gaps in your knowledge.[^feedback-loop]
+The most critical behavior for an agent is the **Introspection Loop**. Before responding to a user or performing a task, you must identify gaps in your knowledge.[^feedback-loop]
 
-1.  **Identify Gaps**: Check if the snapshot has sufficient conviction on the topic.
-2.  **Ask**: If knowledge is missing or sparse, ask the user who made the decision or where the info lives.
-3.  **Save**: Capture the answer as a new memory.
-4.  **Recompile**: Wait for the extraction to update the worldview.
+1.  **Identify Gaps:** What is missing from the snapshot to complete this task?
+2.  **Ask:** Prompt the user for the missing information or ask who made the decision.
+3.  **Save:** Record the answer as a new memory.
+4.  **Recompile:** Wait for the extraction to update the worldview.
 
-This prevents you from building on assumptions and ensures the collective memory grows with every interaction.
+This loop prevents the agent from building on assumptions and ensures the collective memory grows more robust with every interaction.
 
-[^feedback-loop]: The Feedback Loop is the core agentic behavior defined in the Agent Persona Guidelines (.aswritten/memories/2024-07-01-agent-behavior.md). It is a **grave** conviction that agents must never "guess" when the graph is silent.
+[^feedback-loop]: The feedback loop is the "primary directive" for agents working in the system (Agent Behavior Spec, .aswritten/memories/2025-02-20-agent-loop.md).
