@@ -4,15 +4,15 @@ destination: /docs
 ---
 
 ### State
-Summarize the current state of the collective memory.
+Summarize the current state of the compiled worldview.
 
 ### Stories
-Create a section for each story. Summarize the intent of the story, it's relationship to the whole, and a brief summary of how it will be approached from the current collective memory state.
+Create a section for each story. Summarize the intent of the story, its relationship to the whole, and a brief summary of how it will be approached from the current worldview state.
 
 ### Assets
 Briefly summarize the repository structure and a description of each asset.
 
 ### Transactions
-Briefly summarize each transaction (sort by newest first) and its significant to the collective memory graph, stories, and assets.
+Briefly summarize each transaction (sort by newest first) and its significance to the knowledge graph, stories, and assets.
 
 Include mermaid charts where helpful.
