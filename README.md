@@ -18,7 +18,9 @@ Collective memory captures organizational knowledge—decisions, context, and re
 
 ### 1. Connect Claude Code
 
-Copy [.mcp.json](.mcp.json) to your project root or `~/.claude/mcp.json` for global access.
+Start Claude code in the project root 
+
+Or to use this collective memory from anywhere copy [.mcp.json](.mcp.json) to your project root or `~/.claude/mcp.json` for global access.
 
 Restart Claude Code and verify tools appear: `mcp__aswritten__aswritten_compile`, etc.
 
