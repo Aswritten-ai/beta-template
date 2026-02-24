@@ -96,7 +96,7 @@ The **Proof** and **Organization** domains are currently "skeletal." They contai
 
 ***
 
-## StyleRubric Evaluation
+### StyleRubric Scoring
 
 | Criterion | Score | Rationale |
 | :--- | :--- | :--- |
@@ -114,19 +114,18 @@ The **Proof** and **Organization** domains are currently "skeletal." They contai
 
 ***
 
-## Analysis of Collective Memory
+### Analysis of Collective Memory
 
-### TL;DR
-The graph is a perfect "empty house"—the architecture is sound and the rooms are labeled, but no one has moved in yet. We have the *schema* for a world-class narrative, but we lack the *data* (the memories) to make it real.
+**TL;DR**: The graph is a perfect "empty house"—the architecture is sound and the rooms are labeled, but no one has moved in yet. We have the *schema* for a world-class narrative, but we lack the *data* (the memories) to make it real.
 
-### Improvement Opportunities
-- **The Memory Gap**: The current snapshot is almost entirely ontological. To improve the "Accuracy" and "Resonance" of future drafts, the user must add raw memory files (`.md`) from actual meetings, strategy sessions, or product specs.
-- **Conviction Mapping**: While the `Conviction` levels are defined in the ontology, no nodes in the current snapshot have been assigned a conviction level (e.g., `hasConvictionLevel :Conviction_Boulder`). Adding these will allow the AI to distinguish between "ideas" and "decisions."
-- **Provenance Chains**: The current analysis notes that provenance is "Initial Ingestion." As the graph grows, we need to see the `prov:wasAttributedTo` links to understand *who* decided a specific strategy.
+**Memory Improvements**:
+*   **The Memory Gap**: The current snapshot is almost entirely ontological. To improve the "Accuracy" and "Resonance" of future drafts, the user must add raw memory files (`.md`) from actual meetings, strategy sessions, or product specs.
+*   **Conviction Mapping**: While the `Conviction` levels are defined in the ontology, no nodes in the current snapshot have been assigned a conviction level (e.g., `hasConvictionLevel :Conviction_Boulder`). Adding these will allow the AI to distinguish between "ideas" and "decisions."
+*   **Provenance Chains**: The current analysis notes that provenance is "Initial Ingestion." As the graph grows, we need to see the `prov:wasAttributedTo` links to understand *who* decided a specific strategy.
 
-### Prompt Iteration
-The `.story` prompt for "Structural Analysis" is highly effective for a health check. To make it even better, we could add a **"Delta Analysis"** section that specifically compares the current snapshot to the previous one, highlighting what was added or changed in the last 7 days.
+**Prompt Iteration**:
+*   The `.story` prompt for "Structural Analysis" is highly effective for a health check. To make it even better, we could add a **"Delta Analysis"** section that specifically compares the current snapshot to the previous one, highlighting what was added or changed in the last 7 days.
 
-### Next Actions
-1. **User Action**: Add 2-3 memory files (`.md`) containing actual project data (e.g., a meeting transcript or a positioning draft).
-2. **AI Action**: I can implement a "Delta Analysis" prompt iteration if you would like to see how the graph evolves after you add those memories.
+**Next Actions**:
+1.  **User**: Add 2-3 memory files (`.md`) containing actual project data (e.g., a meeting transcript or a positioning draft).
+2.  **AI**: I can implement a "Delta Analysis" prompt iteration if you would like to see how the graph evolves after you add those memories.
