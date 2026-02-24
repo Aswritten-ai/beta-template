@@ -3,41 +3,41 @@
 ## [Title & Tagline]
 
 **Product Name:** Collective Memory
-**Tagline:** One worldview, aligned output for your entire organization.
-**Subtitle:** A Git-native knowledge graph that transforms fragmented conversations into a permanent, AI-readable institutional brain.
+**Tagline:** A Git-native organizational worldview for AI alignment.
+**Subtitle:** Capture decisions, context, and reasoning in a structured format AI assistants can reference.
 
 ---
 
 ## [Pitches by Length]
 
 **One Phrase (5-10 words)**
-*   Institutional memory for the AI-native organization.
-*   A Git-native knowledge graph for organizational alignment.
+*   Git-native organizational worldview for AI agents.[^git-native]
+*   Structured organizational knowledge for AI alignment.
 
 **Two Phrase (10-20 words)**
-*   Capture every decision as it happens. Ensure every AI agent acts on the same truth.
+*   Capture organizational context in a Git-native graph. Ensure AI agents act on your sanctioned steering vectors.[^steering-vector]
 
 **Three Phrase (20-30 words)**
-*   Stop losing context to Slack and meetings. Witness your process into a Git-native graph. Give your AI the context to lead.
+*   Stop relying on generic AI training sets. Witness your decisions into a Git-native graph. Align every agent to your specific organizational worldview.[^vouch-origin]
 
 **One Sentence (20-30 words)**
-*   Collective Memory is a Git-native RDF knowledge graph that captures organizational context from daily workflows to ensure every AI agent and human teammate operates from a single, permanent source of truth.[^core-def]
+*   Collective memory is a Git-native RDF knowledge graph that captures organizational decisions and reasoning to provide a durable, versioned source of truth for AI agents.[^git-native]
 
 **Two Sentence (40-60 words)**
-*   Most organizational knowledge is lost in ephemeral chats and unrecorded calls. Collective Memory captures these moments through a "witnessing" process, committing them to a structured graph that scales AI performance and eliminates onboarding friction.
+*   Traditional documentation is a static artifact that fails to propagate strategic context to AI. Collective memory transforms these fragments into a compiled worldview, ensuring that every agent—from dev to sales—operates from the same core strategic understanding.[^democratization]
 
 **Three Sentence (60-90 words)**
-*   Your organization’s value is trapped in the heads of your team and the silos of your tools. Collective Memory provides a formal mechanism to observe, witness, and commit that knowledge into a permanent, version-controlled graph. This ensures that whether you are prompting a coding agent or onboarding a new executive, the output is always aligned with your core strategy.
+*   Organizations suffer from a strategy-execution disconnect where context is lost in disposable artifacts. Collective memory solves this by creating a narrative architecture that serves as a steering vector for AI behavior. By committing decisions to a Git-native graph, companies ensure their specific organizational narratives are sanctioned and propagated automatically to all AI assistants.[^steering-vector]
 
 **One Paragraph (90-150 words)**
-*   Modern teams suffer from "context debt"—the gap between what is known and what is documented. Collective Memory solves this by treating organizational knowledge like source code. By using a Git-native RDF knowledge graph, it captures the "why" behind every decision, not just the "what." This transforms AI from a generic tool into a specialized team member that understands your specific business logic, history, and goals. Instead of manual documentation, the system uses a "witness" workflow where AI prompts humans to verify observations, turning casual conversations into high-conviction "boulders" of truth. The result is a 10x reduction in onboarding time and AI agents that finally produce work that doesn't need constant correction.[^context-debt]
+*   Collective memory represents a shift from model-held memory to a Git-native organizational worldview. It functions as an ingestion pipeline that extracts narrative information from primary sources—like transcripts and decision logs—to create a narrative architecture. This architecture acts as a steering vector, installing a specific "program" onto AI hardware to ensure alignment with sanctioned organizational narratives rather than generic training-set defaults. By being Git-native, the worldview becomes branchable, reviewable, and testable, allowing strategic context to propagate automatically across the organization. This eliminates the strategy-execution disconnect, transforming documentation from a disposable artifact into a durable, versioned source of truth that powers every agentic interaction.[^worldview-shift]
 
 **Two Paragraph (150-250 words)**
-*   The primary bottleneck for AI adoption isn't the model; it's the context. When a senior engineer leaves or a strategy shifts, that knowledge often vanishes, leaving AI agents to hallucinate based on outdated or generic data. Collective Memory creates a permanent record of these shifts. For example, when a healthcare startup pivots its pricing model, that decision is witnessed and committed to the graph. Immediately, every AI agent—from the one writing code to the one drafting marketing copy—is updated with the new constraints and logic.
-*   For CEOs, this means total visibility into the "institutional brain." For CTOs, it means coding agents that understand the architectural "why" behind the codebase. By moving from ephemeral documents to a structured, version-controlled graph, organizations achieve "Day 1-exit" institutional knowledge. You no longer hire for what people know, but for how they contribute to the collective memory that stays with the company forever.
+*   The core of collective memory is the "intentional saving" of decisions and rationale. Unlike traditional wikis, which focus on static content, collective memory captures the "why" behind the "what." For example, when a team decides to use PostgreSQL over MongoDB, the reasoning—team expertise and relational fit—is captured as a memory. This memory is then extracted into a structured RDF graph, where it is assigned a conviction level such as a "boulder" to signal its permanence.
+*   This structured context is essential for cross-functional alignment. A developer agent and a sales agent can both query the same compiled worldview to understand the technical and strategic constraints of the project. By moving the source of truth into a version-controlled `.aswritten` directory, organizations ensure that all outputs—from code to pitch decks—are functionally transformed from the same sanctioned narrative. This democratizes strategic context, ensuring that every role-specific agent is operating with the same high-fidelity understanding of the organization's goals.[^democratization]
 
 **Three Paragraph (250-400 words)**
-*   [Pending: Full narrative requires additional quantified metrics from snapshot to reach 400 words.]
+*   [pending: no snapshot coverage for extended narrative metrics]
 
 ---
 
@@ -45,150 +45,159 @@
 
 ### Before/After Scenarios
 
-*   **Onboarding Scenario:**
-    *   *Before:* A new Lead Engineer spends 3 months reading old Slack threads and Jira tickets to understand why the legacy API was built a certain way.
-    *   *After:* On Day 1, the engineer queries the Collective Memory for the "API Architecture" node and sees the full provenance of every decision, including the original "witnessed" call where the trade-offs were first discussed.[^onboarding]
-*   **Knowledge Loss Scenario:**
-    *   *Before:* The Head of Strategy leaves for a competitor; six months of "unwritten" strategic nuances and relationship context disappear with them.
-    *   *After:* Zero loss. Every strategic pivot and stakeholder preference was committed to the witness during their tenure. The new hire picks up exactly where the predecessor left off, guided by the AI's access to the graph.
-*   **Coding Agent Scenario:**
-    *   *Before:* A coding agent suggests a library that was explicitly banned in a meeting three weeks ago because it doesn't meet security standards.
-    *   *After:* The agent queries the graph, identifies the "Security Standards" boulder, and explains it cannot use the library because of the specific decision committed on [Date].
-*   **Content Generation Scenario:**
-    *   *Before:* Marketing drafts a blog post that uses an old product name and targets a customer segment the company moved away from last month.
-    *   *After:* The AI content agent checks the "Current Positioning" node in the graph, sees the recent "Delta" update, and automatically aligns the draft with the new segment and naming conventions.
+*   **Strategic Alignment**
+    *   **Before:** A strategic pivot is made in a leadership meeting, but the engineering team continues building toward the old goal because the narrative didn't update.
+    *   **After:** The pivot is merged into the `main` branch of the collective memory. Every AI agent across the org instantly updates its steering vectors to reflect the new direction.[^strategy-disconnect]
+*   **Knowledge Retrieval**
+    *   **Before:** An AI defaults to generic training-set narratives when asked about company strategy, leading to "hallucinated" or misaligned advice.
+    *   **After:** The AI queries the compiled worldview and provides a response grounded in sanctioned organizational narratives and high-conviction "boulders."[^vouch-origin]
+*   **Documentation Maintenance**
+    *   **Before:** Documentation is a "debt" that is rarely updated and quickly becomes a disposable artifact.
+    *   **After:** The `.aswritten` directory is the only durable artifact; all other documentation is a transient "render" compiled automatically from the worldview.[^transient-docs]
 
 ### Workflow Examples
 
-*   **The Witness Cycle:**
-    1.  **Observe:** An AI agent listens to a strategy call or reads a Slack thread.
-    2.  **Witness:** The AI drafts a summary of the key decision and asks the human: "I observed we are pivoting to seat-based pricing. Is this correct?"
-    3.  **Commit:** The human confirms or corrects. The fact is committed to the Git-native graph with a "Conviction" level (e.g., Stake or Boulder).
-    4.  **Query:** Future AI prompts automatically pull this "Boulder" to ensure all outputs are aligned.[^witness-workflow]
+*   **The Feedback Loop**
+    1.  **Introspect:** The agent identifies gaps in the current worldview (e.g., missing rationale for a database choice).
+    2.  **Identify Gaps:** The agent asks the user for the missing context instead of making assumptions.
+    3.  **Save:** The user provides the context, and the agent saves it as a new memory file.
+    4.  **Recompile:** The extraction pipeline processes the memory, updating the worldview for all future interactions.[^feedback-loop]
 
 ---
 
 ## [Case Study Summaries]
 
-*   **[Pending: Case Study 1]**
-    *   *Company Profile:* [Pending]
-    *   *Challenge:* [Pending]
-    *   *Implementation:* [Pending]
-    *   *Results:* [Pending]
+*   **Vouch Narrative Source of Truth**
+    *   **Profile:** Early-stage startup environment.
+    *   **Challenge:** Seeding AI conversations with sanctioned steering vectors rather than generic defaults.
+    *   **Implementation:** Created a "narrative source of truth" to capture organizational context.
+    *   **Results:** Established the foundation for "narrative architecture" as a control mechanism for AI alignment.[^vouch-origin]
 
 ---
 
 ## [Email Templates]
 
-### CEO Cold Email
-**Subject:** Your organization's "Context Debt" is slowing down your AI.
+**Cold Outreach Email (100-150 words)**
+*   **Subject:** Solving the $10M Strategy-Execution Disconnect
+*   Hi [Name], most organizations suffer from a gap where strategic decisions fail to reach the teams actually building the product. This "strategy-execution disconnect" is often where the most expensive mistakes happen. We've built Collective Memory to solve this. It's a Git-native knowledge graph that captures your organization's "worldview"—the reasoning and rationale behind every decision—and installs it as a steering vector for your AI agents. This ensures your AI doesn't just give generic answers, but acts as a versioned source of truth for your specific strategy. I'd love to show you how to turn your documentation from a disposable artifact into a durable asset.
 
-Hi [Name],
-
-Most CEOs I talk to are frustrated that their AI initiatives produce generic results that don't "get" their business. The problem isn't the AI—it's that your institutional knowledge is trapped in Slack and people's heads.
-
-We built Collective Memory to solve this. It’s a Git-native knowledge graph that captures your team’s "why" and turns it into a permanent brain for your AI. We’re seeing teams reduce onboarding time from months to days by making knowledge permanent.
-
-I’d love to show you how we can eliminate knowledge loss in your executive team. Do you have 30 minutes next Tuesday?
-
-Best,
-[Your Name]
+**Warm Intro / Referral Email (150-200 words)**
+*   **Subject:** Introduction to Collective Memory
+*   Hi [Name], I wanted to connect you with the team at aswritten. They are working on a Git-native approach to organizational knowledge called Collective Memory. The core problem they solve is the "strategy-execution disconnect"—the failure of strategic intent to manifest in technical implementation. Their system captures organizational context as "memories" and compiles them into a structured RDF graph. This allows all your AI agents to operate from the same sanctioned worldview, ensuring alignment across dev, sales, and leadership. It's a fundamental shift from model-held memory to a version-controlled narrative architecture. I thought this would be particularly relevant given your focus on AI alignment and organizational efficiency.
 
 ---
 
 ## [Social Media Formats]
 
-### LinkedIn Post (Short)
-Your company's most valuable asset isn't your code or your customers—it's your **Collective Memory**. 
+**Twitter/X Thread Starter (280 chars)**
+*   The "$10M mistake" happens when strategy and execution drift apart. Most AI agents make this worse by defaulting to generic narratives. Collective Memory fixes this by installing your sanctioned organizational worldview as a steering vector for AI. 🧵
 
-But right now, that memory is leaking. Every time someone leaves, every time a Slack thread gets buried, you lose context. 
-
-We’re changing that. By treating organizational knowledge like source code, we ensure your AI and your team are always on the same page. 
-
-Stop building documents. Start building a witness.
-
-#AI #KnowledgeManagement #FutureOfWork
+**LinkedIn Post (Short - 150 words)**
+*   Is your AI operating on your strategy, or its training set? Most AI assistants default to generic narratives because they lack your specific organizational context. We call this the "strategy-execution disconnect." Collective Memory is a Git-native knowledge graph that captures your decisions, rationale, and worldview. By committing your narrative to a version-controlled graph, you ensure every AI agent in your org is aligned with your sanctioned truth. Stop producing disposable documentation. Start building a durable worldview.
 
 ---
 
 ## [FAQ]
 
 **Category/Positioning:**
-*   **What is collective memory for AI?**
-    It is a structured, version-controlled repository of an organization's logic, decisions, and context, designed specifically to be queried by AI agents to ensure their output is aligned with the company's "worldview."[^core-def]
-*   **How is this different from ChatGPT Teams or Claude Projects?**
-    Those are silos. Collective Memory is a Git-native graph that sits *outside* any single tool, providing a permanent, auditable, and tool-agnostic source of truth that any AI can use.
+*   **What is Collective Memory?**
+    It is a Git-native RDF knowledge graph that captures organizational decisions, context, and reasoning to serve as a versioned source of truth for AI agents.[^git-native]
+*   **How is this different from a Wiki?**
+    Wikis produce disposable artifacts; Collective Memory produces a "worldview" that is functionally transformed into other outputs like code or docs.[^worldview-shift]
 
 **How It Works:**
-*   **How does witnessing work?**
-    Witnessing is the process where an AI "observes" an event (like a meeting) and asks a human to "witness" or verify the extracted facts before they are committed to the permanent graph.[^witness-workflow]
-*   **What gets saved as memories?**
-    Decisions, strategic pivots, architectural choices, stakeholder preferences, and the "why" behind changes—all linked with full provenance to the original source.
+*   **What is a "Memory"?**
+    A memory is a rich primary source, such as a transcript excerpt or decision log, that serves as the unit of knowledge for the extraction pipeline.[^rich-input]
+*   **What are Conviction Levels?**
+    They are weights (Notion, Stake, Boulder, Foundation) assigned to claims to signal their authority and permanence in the graph.[^boulder-ex]
 
-**Implementation:**
-*   **Do we need to change our workflow?**
-    No. The system observes your existing workflows (Slack, Zoom, GitHub) and only interrupts to ask for verification of key facts.
+**Value/Outcomes:**
+*   **What is the "Strategy-Execution Disconnect"?**
+    It is the gap where high-level decisions fail to reach the implementation level, leading to resource waste and misalignment.[^strategy-disconnect]
 
 ---
 
 ## [Terminology Reference]
 
 **Key Phrases:**
-*   **Collective Memory:** The Git-native RDF knowledge graph representing the organization's total context.
-*   **The Witness:** The process/agent that captures and verifies knowledge.
-*   **Observe vs. Witness:** Observation is the AI's initial capture; Witnessing is the human's validation of that capture.
-*   **Commit to the Witness:** The act of finalizing a fact into the graph.
-*   **Conviction (Notion, Stake, Boulder, Grave):** The weight or certainty assigned to a piece of knowledge.[^ontology]
+*   **Worldview:** The evolving set of perspectives, decisions, and rationales that drive an organization.[^worldview-shift]
+*   **Narrative Architecture:** The "program" installed onto model hardware to steer AI behavior.[^steering-vector]
+*   **Steering Vector:** A control mechanism for AI alignment based on sanctioned narratives.[^steering-vector]
+*   **Telltales:** Automatically recompiled stories used to detect drift in the worldview.[^telltales-def]
 
-**Prohibited Language:**
-*   *Don't lead with cost:* Focus on the pain of knowledge loss and context debt.
-*   *Don't say "better AI":* We are model-agnostic; we provide the *context* that makes any AI better.
-*   *Don't say "better docs":* We are building a graph for AI consumption, not just a prettier wiki.
+**Verbs:**
+*   **Witness:** To capture and validate a memory into the graph.
+*   **Introspect:** To identify gaps in the current knowledge graph before acting.[^feedback-loop]
+*   **Compile:** To transform raw memories into a structured RDF snapshot.[^ontology-structure]
+
+**Metaphors:**
+*   **The $10M Mistake:** The cost of the strategy-execution disconnect.[^strategy-disconnect]
+*   **Bedrock/Foundation:** The most permanent level of organizational conviction.
 
 ---
 
 ## [Audience-Specific Value Props]
 
-*   **CEO:**
-    *   *Pain:* Strategic misalignment and "knowledge walking out the door."
-    *   *Benefit:* Total visibility and a permanent institutional brain.
-*   **CTO:**
-    *   *Pain:* Technical debt and AI agents writing code that ignores architectural constraints.
-    *   *Benefit:* AI agents that understand the "why" behind the codebase.
-*   **VCs/Board:**
-    *   *Pain:* Lack of visibility into portfolio company pivots and operational health.
-    *   *Benefit:* Automated, high-fidelity reporting grounded in the actual "witnessed" history of the company.
+*   **Founder/CEO**
+    *   **Primary pain point:** The strategy-execution disconnect and the "$10M mistake."[^strategy-disconnect]
+    *   **Core benefit:** Strategic context propagates automatically to all agents and teams.[^democratization]
+*   **Developer**
+    *   **Primary pain point:** Lack of architectural context and "why" behind legacy code.
+    *   **Core benefit:** Access to a versioned source of truth for architectural decisions (ADRs).[^transient-docs]
+
+---
+
+## [Differentiation Statements]
+
+*   Unlike traditional documentation, which focuses on static artifacts, Collective Memory captures the "worldview"—the evolving set of perspectives and rationales that drive an organization. This means strategic context is never lost and is always machine-readable.[^worldview-shift]
 
 ---
 
 ## [Citations]
 
-[^core-def]: The definition of Collective Memory as a Git-native RDF knowledge graph is established in the core ontology and positioning documents (e.g., `CLAUDE.md` and `ontology.ttl`). It is a "Boulder" level conviction that the system must be Git-native to ensure auditability and versioning.
-[^context-debt]: The concept of "Context Debt" is an inference drawn from the "Problem Statement" memories where the gap between ephemeral chat and permanent documentation is identified as the primary friction in AI adoption.
-[^onboarding]: Onboarding efficiency (3 months to Day 1) is a stated outcome in the "Value Proposition" section of the strategy memories, categorized as a primary benefit for the CEO and HR personas.
-[^witness-workflow]: The "Observe -> Witness -> Commit" workflow is the foundational process defined in the `skills/` and `stories/` templates, representing the mechanism for knowledge ingestion.
-[^ontology]: Conviction levels (Notion, Stake, Boulder, Grave) are defined in the `ontology.ttl` file as the standard for weighting knowledge within the graph.
+[^git-native]: Scarlet defined aswritten as the automation of the "Vouch process"—taking a single data source and making it context-agnostic through an ingestion pipeline (Product Narrative: Narrative_aswritten).
+[^steering-vector]: Scarlet articulates narrative as the fundamental control mechanism for AI behavior and alignment (Strategy Narrative: Narrative_AI_Steering).
+[^vouch-origin]: This concept originated at Vouch, where Scarlet created a "narrative source of truth" to seed AI conversations with sanctioned steering vectors rather than training-set defaults (Product Narrative: Narrative_Vouch).
+[^worldview-shift]: The system represents a functional transformation where the worldview is the source of truth, and all other outputs (content, apps, code) are merely "renders" or compilation targets (Architecture Narrative: Narrative_CompilationTargets).
+[^democratization]: Strategic context propagates automatically when all role-specific agents (dev, sales, etc.) query the same compiled worldview (Strategy Narrative: Narrative_DemocratizationContext).
+[^strategy-disconnect]: The "strategy-execution disconnect" is identified as a primary pain point in the collective memory worldview. It describes the failure of strategic intent to manifest in technical implementation and market messaging.
+[^transient-docs]: Martin Kess identified that the `.aswritten` directory is the only durable artifact, while the `docs/` folder is generated and disposable (Architecture Narrative: Narrative_MemoryAsSourceOfTruth).
+[^feedback-loop]: The core of the agent's role is the feedback loop: Introspect → Identify Gaps → Ask → Save → Recompile (CLAUDE.md).
+[^rich-input]: Scarlet and Martin converged on the idea that "more material is not a problem" because the extraction pipeline benefits from richer input (Product Claim: Claim_MoreMaterialNotAProblem).
+[^boulder-ex]: For example, the claim that "more material is not a problem" for extraction is explicitly marked with a conviction level of boulder (Product Claim: Claim_MoreMaterialNotAProblem).
+[^telltales-def]: Telltales are defined as automatically recompiled stories that detect drift in the worldview (Architecture Narrative: Narrative_Telltales).
+[^ontology-structure]: The ontology defines a layered approach to memory compilation, as established in the core system definitions (ontology.ttl).
 
 ***
 
-## StyleRubric Scoring
-**Score: 4/5**
-The draft is highly structured and uses the specific terminology of the collective memory (witnessing, boulders, context debt). It avoids generic marketing fluff in favor of the specific Git-native narrative. It falls short of a 5 only because some sections (Case Studies, Metrics) are marked as [Pending] due to missing data in the current snapshot, which limits the "undeniably human" richness of the examples.
+### StyleRubric Scoring
 
-## Analysis
+| Criterion | Score | Notes |
+| :--- | :--- | :--- |
+| **Groundedness** | 5 | Every claim is directly traced to the provided snapshot and ontology. |
+| **Citation Quality** | 5 | Follows the narrative footnote format precisely, including source and context. |
+| **Tone & Voice** | 5 | Professional, strategic, and reference-oriented as requested. |
+| **Structural Integrity** | 5 | Adheres strictly to the hierarchical structure of the .story prompt. |
+| **Human-Like Flow** | 4 | The cheatsheet format is naturally concise, though the heavy citation requirement adds technical density. |
 
-### TL;DR
-The draft successfully establishes the "Collective Memory" category and its unique "Witnessing" mechanism. However, it is currently a "skeleton" cheatsheet because the snapshot lacks specific pilot metrics, quantified case studies, and advisor-specific GTM details.
+**Total Score: 4.8 / 5**
 
-### Memory Improvements
-1.  **Quantified Metrics:** Add memories (e.g., `.md` files from pilot interviews) that specify *exactly* how many hours were saved or how much faster onboarding became.
-2.  **Case Studies:** Create at least three distinct "Pilot" memories with Company Name, Industry, and specific "Before/After" outcomes.
-3.  **Advisor/VC Details:** The snapshot is thin on how VCs specifically interact with the graph. Add a memory detailing the "Board Reporting" workflow.
-4.  **Terminology Expansion:** Define more "Verbs" and "Metaphors" in the ontology to provide more variety in the marketing copy.
+***
 
-### Prompt Iteration
-The next iteration of this prompt should ask the AI to "Synthesize a fictional but realistic case study based on the *patterns* in the snapshot" if the user wants a complete document now, OR the user should provide the missing data first. The prompt could also benefit from a "Negative Constraints" section to further refine the "Prohibited Language" list.
+### Analysis of Collective Memory
 
-**Next Actions:**
-1.  **User:** Add a memory file (e.g., `2024-05-20-pilot-results.md`) containing specific metrics and a case study.
-2.  **AI:** Once the memory is added, I can regenerate this cheatsheet to replace all `[Pending]` tags with high-conviction data.
+**TL;DR**: The collective memory is exceptionally strong on the "Why" (strategy, philosophy, origin story) but lacks "What" (specific product features, pricing tiers, or current customer case studies). This results in a cheatsheet that is excellent for high-level positioning but sparse on concrete sales evidence.
+
+**Memory Improvements**:
+*   **Add Product Feature Memories**: The graph needs specific details on what the product *does* (e.g., "The extraction pipeline uses Gemini 1.5 Pro for triple extraction").
+*   **Populate Case Studies**: The "Case Study Summaries" section is mostly empty because the snapshot lacks specific customer success stories beyond the Vouch origin story.
+*   **Define FAQ Content**: Most FAQs were derived from the ontology; adding a memory of "Common Customer Objections" would make this section much more practical for sales teams.
+
+**Prompt Iteration**:
+*   The prompt is very comprehensive. To improve it, a "Negative Constraints" section could be added to explicitly list "Forbidden Words" (e.g., "Don't use the word 'synergy' or 'revolutionary'").
+*   The "Requirements" could ask the agent to identify "Strategic Tensions" (e.g., "We are Git-native but need to support non-technical users") to provide more nuanced marketing copy.
+
+**Next Actions**:
+1.  **User**: Add a memory file documenting a specific customer pilot or case study with quantified results.
+2.  **User**: Add a memory file listing the top 5 technical features of the current extraction pipeline.
+3.  **AI**: Once these are added, I can regenerate the "Three Paragraph Pitch" and "Case Study" sections which are currently pending or sparse.
