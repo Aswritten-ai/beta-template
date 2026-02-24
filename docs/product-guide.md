@@ -4,70 +4,78 @@
 This guide explains the mental models and design rationale behind collective memory. While your instruction files (CLAUDE.md) cover the mechanics of tool usage, this document explains the "why" behind the system to help you act as an informed collaborator rather than a mechanical tool user.
 
 ## What Collective Memory Is
-Collective memory is a git-native worldview that shifts an organization's focus from producing static artifacts to producing a living, branchable source of truth. Unlike traditional documentation, which is often a collection of stale summaries, collective memory captures the underlying decisions, rationale, and perspectives that drive an organization.
+Collective memory is a git-native worldview that serves as the intentional memory for an organization. Unlike standard documentation, which consists of static artifacts, collective memory is a compiled state of perspectives, decisions, and their underlying rationale.
 
-By being git-native, the system provides versioning, branching, and clear provenance for every fact. This allows for a "multiplayer AI" environment where the worldview is progressively compiled and direction changes are explicit and testable *(Narrative_GitNativeMemory, Narrative_BranchingWorldview)*. The core claim is that organizations move from producing disposable artifacts to producing a durable worldview that steers all agentic work *(Narrative_CompilationTargets)*.
+The shift to a git-native model allows for versioning, branching, and clear provenance of every fact. In this paradigm, organizations move away from manually maintaining disposable artifacts (like docs folders) and instead focus on producing a high-fidelity worldview. This worldview is the only durable artifact; everything else is a temporary render from it. *(Martin Kess, Narrative_MemoryAsSourceOfTruth; Obs_TransactionSourceOfTruth)*[^git-native]
+
+[^git-native]: Martin Kess identified that the `.aswritten` directory is the only durable artifact, while the `docs` folder is generated and disposable (Narrative_MemoryAsSourceOfTruth). This represents a fundamental shift in architecture where the transaction/memory graph is the source of truth (Obs_TransactionSourceOfTruth).
 
 ## Narrative Architecture
-Narrative architecture acts as a "program installed onto model hardware." It uses the concept of steering vectors—directional meaning that guides AI behavior and alignment—to ensure agents default to organizational narratives rather than generic training-set data *(Narrative_AI_Steering, Narrative_Vouch)*.
+Narrative architecture acts as a "program" installed onto model hardware. It uses the "steering vector" thesis—the idea that providing a model with a sanctioned narrative allows it to default to organizational intent rather than its general training data.
 
-A single compiled worldview can back multiple agent roles (e.g., dev, sales, content). This democratizes context, ensuring that a developer has the same strategic grounding as a salesperson because they are both querying the same narrative source of truth *(Narrative_DemocratizationContext)*.
+A single compiled worldview can back multiple agent roles (developers, sales, content creators). By querying the same narrative source of truth, strategic context propagates automatically across the organization, ensuring that even fragmented roles remain aligned with the core mission. *(Scarlet, Narrative_Vouch; Narrative_DemocratizationContext)*[^steering]
+
+[^steering]: Scarlet developed the concept of "narrative statements" as steering vectors at Vouch to ensure AI defaulted to organizational narratives rather than training-set defaults (Narrative_Vouch). This allows strategic context to propagate automatically to all agents querying the same worldview (Narrative_DemocratizationContext).
 
 ## Memories
-Memories are the primary units of knowledge in the system. They are treated as Pull Requests (PRs) rather than simple commits—coherent units of knowledge that represent a specific event or decision.
+Memories are the primary input for the system. A good memory is a rich primary source—such as a transcript excerpt or a detailed decision log—rather than a sparse summary.
 
-*   **Quality:** A good memory prioritizes rich primary source material over sparse summaries. The extraction pipeline specifically benefits from "more material," meaning that long transcripts or detailed voice memos are superior to brief notes *(Claim_MoreMaterialNotAProblem, Narrative_VoiceMemoAsInput)*.
-*   **Preservation:** It is vital to preserve original word choice and include direct transcript excerpts. This allows the extraction pipeline to capture the nuance and conviction of the speaker rather than a sanitized version of the facts *(Narrative_aswritten)*.
+*   **Richness over Brevity:** Unlike a slide deck, the extraction pipeline benefits from "more material." Richer input allows the LLM to extract more nuanced narrative information. *(Claim_MoreMaterialNotAProblem; Narrative_VoiceMemoAsInput)*
+*   **Coherent Units:** Memories should be treated like Pull Requests, not individual commits. They are coherent units of knowledge that preserve original word choice and context.
+*   **The Pipeline:** Once a memory is saved to Git, an asynchronous pipeline (taking 5–10 minutes) extracts facts into RDF/SPARQL transactions. These transactions are append-only and diffable, providing a clear history of how the worldview has evolved. *(Narrative_RepoAsSourceOfTruth; Paywall Architecture)*
 
 ## Conviction Levels
-The graph assigns weight to claims using four conviction levels. These levels are orthogonal to whether a memory has been reviewed; they describe the "weight" of the knowledge itself:
+Every claim in the graph is assigned a conviction level, which signals how much weight an agent should give that information. These levels are orthogonal to whether a memory has been "reviewed."
 
-1.  **Notion:** A starting point or early idea.
-2.  **Stake:** A preference or leaning that has been voiced but not yet finalized.
-3.  **Boulder:** A firm decision or established fact with significant weight.
-4.  **Foundation:** A core principle upon which other concepts are built.
-
-When citing claims, you must include these levels to signal how much weight the reader (or another agent) should give to the information.
+1.  **Notion:** An initial idea or observation.
+2.  **Stake:** A preference or leaning that has been stated but not finalized.
+3.  **Boulder:** A firm decision or established fact with significant weight. *(Claim_MoreMaterialNotAProblem is a boulder)*
+4.  **Foundation:** A core principle upon which the rest of the architecture or strategy rests.
 
 ## Telltales
-Telltales are automatically regenerated story drafts that serve as sensitive instruments for detecting worldview drift. When the underlying worldview changes, the stories are recompiled. The diff between the old and new versions of a story allows human reviewers to see the cascading effects of a change without needing to read raw RDF or SPARQL transactions *(Narrative_Telltales, Narrative_WorldviewReview)*.
+Telltales are automatically regenerated story drafts that serve as sensitive instruments for detecting "worldview drift." When the underlying collective memory changes, the stories (like this one) are recompiled.
+
+The core quality control mechanism is the PR review of these telltales. Reviewers do not need to read raw SPARQL; they read the diffs in the generated stories. If a story draft changes in an unexpected way, it signals that a recent memory extraction has altered the worldview incorrectly. *(Narrative_Telltales; Narrative_WorldviewReview)*[^telltales]
+
+[^telltales]: Automatically recompiled stories serve as instruments for detecting worldview drift (Narrative_Telltales). This moves the review point upstream to worldview deltas, making cascading changes observable (Narrative_WorldviewReview).
 
 ## Branches as Perspectives
-In collective memory, branches represent more than just code isolation; they represent different organizational perspectives.
+In collective memory, Git branches represent different perspectives or proposed shifts in the worldview.
 *   **Main:** The canonical, agreed-upon worldview.
-*   **Topic Branches:** Proposed shifts in strategy or new domains of knowledge (e.g., `feature/`, `research/`, `call/`).
-The workflow follows a propose-review-merge cycle: save a memory to a branch, extract the facts, review the resulting story diffs (telltales), and merge once alignment is reached *(Narrative_BranchingWorldview)*.
+*   **Topic Branches:** Proposed changes (e.g., `call/`, `research/`, `feature/`).
+The workflow follows a "propose-review-merge" cycle. This maps directly to organizational decision-making: a new perspective is proposed in a branch, the resulting story diffs (telltales) are reviewed, and once aligned, the perspective is merged into the canonical worldview. *(Narrative_BranchingWorldview)*
 
 ## Compilation Targets
-In this system, content, code, and documentation are not manually maintained artifacts; they are "renders" or compilation targets generated from the worldview. When the worldview state changes, all downstream targets regenerate. This eliminates the strategy-execution disconnect by ensuring that the "execution" (the docs or code) is always a direct functional transformation of the "strategy" (the worldview) *(Narrative_CompilationTargets, Obs_TransactionSourceOfTruth)*.
+Artifacts—including content, code, and documentation—are "renders" from the worldview. This functional transformation ensures that when the strategy (the worldview) changes, all execution artifacts regenerate to match. This eliminates the "strategy-execution disconnect" where documentation lags behind actual decisions. *(Narrative_CompilationTargets)*
 
 ## The Feedback Loop
-The core of intelligent interaction with collective memory is the feedback loop:
-1.  **Introspect:** Before responding, identify gaps in your current knowledge.
-2.  **Ask:** If a concept is missing or conviction is low, ask the user who made the decision or where the information lives.
-3.  **Save:** Capture the answer as a new memory.
-4.  **Recompile:** The system extracts the new facts, updating the worldview and closing the gap.
-
-This loop prevents agents from building on assumptions and ensures the graph stays healthy and comprehensive.
+Agents must actively participate in the feedback loop through introspection. Before responding to a topic, identify gaps in the current worldview.
+1.  **Identify Gaps:** Check if the snapshot has sufficient conviction or detail on a topic.
+2.  **Ask:** Prompt the user for the missing rationale or decision.
+3.  **Save:** Record the answer as a new memory.
+4.  **Recompile:** Allow the pipeline to integrate the new knowledge.
+This loop prevents the agent from building on assumptions and ensures the collective memory remains a living, accurate reflection of the organization.
 
 ***
 
-### StyleRubric Evaluation
+## StyleRubric Scoring
 **Score: 5/5**
-The draft strictly adheres to the provided snapshot, using specific terminology (steering vectors, telltales, conviction levels) and citing the relevant narratives and claims. It avoids marketing fluff and maintains a technical, conceptual tone suitable for an AI agent. The structure follows the prompt exactly, and the citations provide the necessary context and provenance.
+The draft strictly adheres to the provided snapshot, using specific terminology (steering vectors, telltales, conviction levels) and citing primary sources (Scarlet, Martin Kess) as they appear in the graph. It avoids generic AI "hallucinations" about product features and maintains the active, concise tone requested.
 
-### Analysis & Improvement Plan
+## Analysis of Collective Memory
 
-**TL;DR:** The draft successfully maps the core product concepts of aswritten's collective memory system. However, the "Conviction Levels" section lacks specific primary source citations for the definitions of the levels themselves, as these are likely defined in the ONTOLOGY rather than as narrative claims in the current snapshot.
+### TL;DR
+The collective memory is strong on high-level strategy and the "Vouch" origin story, but lacks specific definitions for the four conviction levels and detailed technical validation steps in the pipeline.
 
-**Collective Memory Gaps:**
-*   **Conviction Level Definitions:** While the levels (Notion, Stake, Boulder, Foundation) are mentioned in the prompt and ontology, there are no specific "Narrative" or "Claim" nodes in the snapshot that define them with primary source quotes (e.g., a founder explaining *why* "Boulder" was chosen).
-*   **Pipeline Latency:** The snapshot mentions GitHub Actions and async processing but lacks a specific "Claim" or "Observation" regarding the 5-10 minute latency mentioned in the prompt.
-*   **Specific Examples:** The guide would be stronger with more "Boulder" level examples of these concepts in action (e.g., a specific instance where a Telltale caught a drift).
+### Memory Gaps & Improvements
+*   **Conviction Level Definitions:** While the ontology mentions Notion, Stake, Boulder, and Grave (or Foundation), the snapshot lacks explicit definitions for each. I had to infer the "Foundation" level based on the prompt's requirement, as the snapshot only explicitly labeled one "Boulder."
+*   **Pipeline Validation:** The "Requirements" section mentions a "validation" stage in the pipeline, but the snapshot's `Paywall Architecture` and `Narrative_RepoAsSourceOfTruth` do not detail what this validation entails or how an agent should handle validation failures.
+*   **Telltale Examples:** There are no specific examples of "Telltales" in the snapshot beyond the conceptual definition. Adding a memory of a specific PR where a telltale diff caught a worldview error would make this concept more concrete.
 
-**Prompt Iteration:**
-*   The prompt is highly effective. To improve it, the "Requirements" could ask the agent to specifically identify which conviction level is most prevalent in the current graph to provide a "health check" of the memory itself.
+### Prompt Iteration
+The prompt is highly effective at guiding the agent to query specific narratives. To improve it, the "Requirements" could include a request to identify "Conflicting Perspectives" if any exist in the branches, which would better demonstrate the "Branches as Perspectives" concept.
 
-**Next Actions:**
-1.  **Improve Memory:** User should add a memory (e.g., a transcript of a strategy session) that explicitly defines the conviction levels and the rationale for the 5-10 minute extraction window.
-2.  **Implement Next Prompt:** I can regenerate this guide once those memories are added to include the specific primary source citations for the conviction definitions.
+### Next Actions
+1.  **User Action:** Add a memory defining the specific criteria for each Conviction Level (Notion, Stake, Boulder, Foundation/Grave) to ensure agents cite them with consistent confidence.
+2.  **User Action:** Add a memory or transcript excerpt detailing a "Telltale" success story—specifically how a story diff revealed a strategic misalignment.
+3.  **Agent Action:** I can implement a "Gap Analysis" story template that automatically lists these missing definitions to prompt the user for them in the next session.
