@@ -10,6 +10,8 @@ tone: clear, concise, reference-ready, canonical
 
 This is a reference document for consistent marketing language across all channels. Format as scannable cheatsheet with hierarchical sections. Not a guide—a reference. Everything here should be copy-pasteable.
 
+All content is derived entirely from the compiled snapshot. Do not inject terminology, examples, audiences, or positioning that are not present in the snapshot. If a section has no relevant content in the snapshot, output "[pending: no snapshot coverage]" for that section rather than inventing content.
+
 ## Assignment
 
 Generate comprehensive marketing cheatsheet containing pitches at multiple lengths (phrase/sentence/paragraph), examples, case study summaries, email templates, social formats, and FAQ. All content derived from snapshot's positioning, terminology, and use cases.
@@ -21,24 +23,24 @@ One canonical source of truth for all marketing language. Every pitch, email, po
 ## Requirements
 
 1. **Query positioning statements from snapshot** - Extract core definition, category, outcome, differentiation
-2. **Surface value propositions from snapshot** - Identify benefits by audience (CEO, CTO, Strategy, PM, Engineering, VCs)
+2. **Surface value propositions from snapshot** - Identify benefits by each audience/persona found in the snapshot
 3. **Draw terminology from snapshot** - Key phrases, verbs, metaphors that define the narrative
 4. **Generate examples from snapshot** - Use cases showing before/after, workflow, impact
-5. **Extract capabilities from snapshot** - What AI does with collective memory (development, executive, content, change tracking)
+5. **Extract capabilities from snapshot** - What the product/service does, organized by function
 6. **Derive FAQ from snapshot** - Common questions from decision records, positioning, capabilities
 7. **Match tone to snapshot** - Communication style, voice, emphasis patterns
 
 ## Structure
 
 ### Title & Tagline
-- Product name
-- One-line tagline (under 10 words)
+- Product/company name from snapshot
+- One-line tagline (under 10 words) derived from core positioning
 - Subtitle/value prop (under 15 words)
 
 ### Pitches by Length
 
 **One Phrase (5-10 words)**
-- Core definition
+- Core definition from snapshot
 - Category + outcome
 
 **Two Phrase (10-20 words)**
@@ -79,59 +81,50 @@ One canonical source of truth for all marketing language. Every pitch, email, po
 ### Examples
 
 **Before/After Scenarios**
-Generate 3-5 examples from snapshot showing:
-- Onboarding scenario (3-6 months → day 1)
-- Knowledge loss scenario (departure → zero loss)
-- Coding agent scenario (generic implementation → business-aligned)
-- Content generation scenario (manual updates → auto-generated)
-- Board reporting scenario (manual compilation → auto-generated)
+Generate 3-5 examples from snapshot showing transformation stories. For each:
+- The situation before (pain point, inefficiency, risk)
+- The situation after (outcome, metric, improvement)
+- Derive scenarios from whatever use cases, customer stories, or pain points exist in the snapshot. Do not invent scenarios not grounded in snapshot content.
 
 **Workflow Examples**
 Draw from snapshot's process descriptions:
-- User observes with AI → AI prompts witness → draft together → commit → review → update
-- Show concrete example (e.g., healthcare pivot, ADR creation, strategy shift)
+- Surface the core workflow or user journey as described in the snapshot
+- Show concrete examples using scenarios present in the snapshot
 
 **Use Case Illustrations**
-Generate from snapshot's solution archetypes:
-- Creative agency managing client knowledge
-- Consulting firm onboarding consultants
-- Digital agency maintaining code context
-- VC tracking portfolio company progress
+Generate from snapshot's target market, customer profiles, or solution archetypes:
+- One illustration per distinct audience or customer type found in the snapshot
+- If the snapshot describes specific industries or company types, use those
 
 ### Case Study Summaries
 
-For each pilot/case study in snapshot, generate:
-- **Company profile** (size, industry, role composition)
+For each pilot, customer, or case study found in the snapshot, generate:
+- **Company/user profile** (size, industry, role composition — as available)
 - **Challenge** (pain point before implementation)
-- **Implementation** (how they started, what they witnessed)
-- **Results** (time saved, productivity gained, specific metrics)
-- **Quote** (if available in snapshot, otherwise note "pending")
+- **Implementation** (how they started, what they did)
+- **Results** (outcomes, metrics — as available)
+- **Quote** (if available in snapshot, otherwise note "[pending]")
 
 Format: 2-3 sentences, emphasis on quantified outcomes.
+If no case studies exist in the snapshot, output "[pending: no case studies in snapshot]".
 
 ### Email Templates
 
-**Advisor Intro Email (150-200 words)**
-- Subject line
-- Hook (problem statement)
-- Solution overview
-- Ask (warm intro to specific company profile)
-- Query snapshot for advisor-led GTM approach
+For each distinct outreach context found in the snapshot (e.g., prospect types, referral channels, partnership approaches), generate an email template:
 
-**CEO Cold Email (100-150 words)**
+**Cold Outreach Email (100-150 words)**
 - Subject line
-- Pain point (operational, not cost)
-- Solution (collective memory concept)
-- Proof (pilot offer)
-- CTA (30-minute call)
-- Draw language from snapshot's pain-first positioning
+- Pain point from snapshot's problem statements
+- Solution framed in snapshot's positioning language
+- Proof point or offer from snapshot
+- CTA
+- Draw language from snapshot's positioning and tone
 
-**VC Portfolio Email (150-200 words)**
+**Warm Intro / Referral Email (150-200 words)**
 - Subject line
-- Value for VCs (portfolio visibility, reporting automation)
-- Value for portfolio companies (operational improvement)
-- Ask (pilot with 1-2 portfolio companies)
-- Surface VC value propositions from snapshot
+- Hook (problem statement from snapshot)
+- Solution overview in snapshot language
+- Specific ask derived from snapshot's GTM approach
 
 **Follow-up Email (75-100 words)**
 - Reference to previous conversation
@@ -139,11 +132,13 @@ Format: 2-3 sentences, emphasis on quantified outcomes.
 - Specific next step
 - Keep conversational tone
 
+Generate additional email templates if the snapshot describes other outreach contexts (investor, partner, advisor, etc.). Only generate templates for audiences that exist in the snapshot.
+
 ### Social Media Formats
 
 **Twitter/X Thread Starter (280 chars)**
 Hook that drives to problem or insight.
-Generate from snapshot's hook patterns.
+Generate from snapshot's core problem statement or positioning hooks.
 
 **LinkedIn Post (Short - 150 words)**
 Problem → solution → call-to-action.
@@ -151,7 +146,7 @@ Surface snapshot's use case most relevant to professional audience.
 
 **LinkedIn Post (Long - 300 words)**
 Story format: customer challenge → implementation → results.
-Generate from snapshot's case studies or pilot descriptions.
+Generate from snapshot's case studies or customer descriptions.
 
 **LinkedIn Carousel Outline (5-7 slides)**
 - Hook slide
@@ -159,113 +154,83 @@ Generate from snapshot's case studies or pilot descriptions.
 - Solution slide
 - Value slides (2-3)
 - CTA slide
-Extract content from snapshot's four pillars and value propositions.
+Extract content from snapshot's value propositions and core messaging pillars.
 
 **Demo Video Script (60-90 seconds)**
-- Hook (15 sec): Problem statement
-- Demo (45 sec): Live workflow (observe → witness → query)
-- Close (15 sec): Pilot CTA
+- Hook (15 sec): Problem statement from snapshot
+- Demo (45 sec): Core workflow as described in snapshot
+- Close (15 sec): CTA from snapshot
 Draw workflow from snapshot's process descriptions.
 
 ### FAQ
 
-Generate 15-20 questions from snapshot covering:
+Generate 15-20 questions from snapshot organized by category. Derive categories from whatever domains the snapshot covers. Common categories include:
 
 **Category/Positioning:**
-- What is collective memory for AI?
-- How is this different from ChatGPT Teams or Claude Projects?
-- Is this a new AI model?
+- What is [product/service]?
+- How is this different from [alternatives mentioned in snapshot]?
+- Generate additional positioning questions from snapshot's differentiation claims
 
 **How It Works:**
-- How does witnessing work?
-- What gets saved as memories?
-- How do AIs query the witness?
-- What's the review process?
+- Generate questions about the core workflow and mechanisms described in the snapshot
+- Cover the main user-facing processes
 
 **Implementation:**
-- How long does setup take?
-- What AIs does this work with?
-- Do we need to change our workflow?
-- What about existing AI conversations?
+- Generate questions about setup, integration, and adoption based on snapshot's technical and process descriptions
 
 **Data/Security:**
-- Who owns the data?
-- Where is data stored?
-- Can we export our memories?
-- What about sensitive information?
+- Generate questions about data handling, ownership, and security if covered in the snapshot
 
 **Value/Outcomes:**
-- How fast do new hires get productive?
-- What happens when someone leaves?
-- How does this help with coding?
-- How does content generation work?
+- Generate questions about results and benefits based on snapshot's value propositions and metrics
 
 **Pricing/Business:**
-- How is this priced?
-- What's included in pilot?
-- How long is typical pilot?
-- What does success look like?
+- Generate questions about pricing, engagement models, and terms if covered in the snapshot
 
 **Target Market:**
-- Who is this for?
-- Why not enterprise?
-- What about tech startups?
-- VCs/Board value proposition?
+- Generate questions about who the product/service is for based on snapshot's audience definitions
 
 For each question, generate answer from snapshot (2-4 sentences). If snapshot lacks specific detail, note "[pending validation]" rather than inventing content.
 
 ### Terminology Reference
 
 **Key Phrases:**
-Extract and define from snapshot:
-- Collective memory
-- The witness
-- Observe vs. witness
-- Commit to the witness
-- Query the witness
-- Day 1-exit institutional knowledge
-- One worldview, aligned output
+Extract and define all product-specific terminology from the snapshot. List each term with its definition and usage context as established in the snapshot.
 
 **Verbs:**
 List primary action verbs from snapshot with usage context.
 
 **Metaphors:**
-Extract metaphor patterns from snapshot (e.g., git-parallel language, organizational transparency).
+Extract metaphor patterns and analogies from snapshot.
 
 **Prohibited Language:**
-Note what NOT to say based on snapshot's positioning decisions:
-- Don't lead with cost (pain first)
-- Don't say "better AI" (we're tool-agnostic)
-- Don't say "better docs" (for AI consumption, not human)
-- Avoid generic tech startup language if targeting agencies
+Note what NOT to say based on snapshot's positioning decisions. If the snapshot contains explicit positioning choices (what to emphasize, what to avoid), surface them here. If not, note "[pending: no positioning constraints in snapshot]".
 
 ### Audience-Specific Value Props
 
-For each audience in snapshot, generate:
+For each audience or persona found in the snapshot, generate:
 - **Primary pain point** (what keeps them up at night)
-- **Core benefit** (what collective memory solves)
-- **Proof point** (metric or example)
-- **Language to use** (how they talk about the problem)
+- **Core benefit** (what the product/service solves for them)
+- **Proof point** (metric or example from snapshot)
+- **Language to use** (how this audience talks about the problem, per snapshot)
 
-Audiences: CEO, Head of Strategy, CTO, PM, Engineering, Sales, VCs/Board, Advisors
+Derive the audience list entirely from the snapshot. Do not assume audiences not present in the snapshot.
 
 ### Differentiation Statements
 
-Generate from snapshot's positioning:
-- vs. ChatGPT Teams/Claude Projects
-- vs. Confluence/Notion (traditional docs)
-- vs. Building it yourself
-- vs. No solution (status quo)
-
-Format: "Unlike X, collective memory [key difference]. This means [outcome]."
+Generate from snapshot's positioning and competitive landscape:
+- For each competitor, alternative, or status quo mentioned in the snapshot, generate a differentiation statement
+- Format: "Unlike [alternative from snapshot], [product] [key difference]. This means [outcome]."
+- If the snapshot does not mention competitors or alternatives, note "[pending: no competitive positioning in snapshot]"
 
 ## Constraints
 
 - **Format:** Markdown with clear hierarchical headers, scannable sections
 - **Length:** Respect specified word counts for each section
 - **Tone:** Reference document, not marketing copy - factual, precise, copy-pasteable
-- **Completeness:** If snapshot lacks content for a section, note "[pending: need case study]" or "[pending: validation]"
-- **No invention:** Do not create examples, quotes, or metrics not present in snapshot
+- **Completeness:** If snapshot lacks content for a section, note "[pending: need [what's missing]]" rather than inventing content
+- **No invention:** Do not create examples, quotes, metrics, terminology, audience segments, or competitive comparisons not present in snapshot
+- **Snapshot-derived only:** Every term, example, audience, competitor, and claim must trace back to the compiled snapshot. This template ships to users with different knowledge graphs — hardcoded content from any single organization will contaminate their output.
 - **Citations:** Include snapshot provenance in comments for key claims (not visible in output but helpful for maintenance)
 - **Structure:** Use consistent formatting (bold for headers within sections, bullets for lists, emphasis for key terms)
 - **Output format:** Single markdown file, hierarchical structure, easy to search/scan
@@ -278,5 +243,6 @@ This document succeeds if:
 3. No one needs to "write from scratch" - they copy/adapt from here
 4. Updates to snapshot can regenerate this document automatically
 5. Every claim is traceable to snapshot source
+6. The cheatsheet contains zero content not derived from the user's own snapshot
 
 Generate complete cheatsheet with all sections. Use "[section]" headers for clear navigation.
