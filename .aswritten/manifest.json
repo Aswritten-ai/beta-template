@@ -6,6 +6,13 @@
       null
     ]
   },
+  "docs/internal/north-star.md": {
+    "path": "docs/internal/north-star.md",
+    "sha": "d35e863e787afd9435784db9f08849d0bf21f4fb",
+    "tx": [
+      null
+    ]
+  },
   "docs/summary.md": {
     "path": "docs/summary.md",
     "sha": "37309023bffa0180340fa297be6c9338eb885e28",
