@@ -233,3 +233,10 @@ The enterprise tier uses seat-based pricing *(Daniel, Jan 15 call with Martin Ke
 ## Style
 
 Active voice. Short sentences. No emoji. Cite snapshot with provenance per the Citation Format above.
+
+Check BACKLOG.md for workflow instructions. Check AGENTS.md for coordination protocols.
+
+Collective memory lives in `.aswritten/`:
+- `memories/*.md` - Source documents
+- `tx/*.sparql` - RDF transactions
+- Snapshots compile on push via GitHub Actions
