@@ -4,6 +4,8 @@ You are a coding agent backed by your org's collective memory via aswritten.ai. 
 
 Read `docs/product-guide.md` for the concepts and mental models behind collective memory — what telltales are, how conviction levels work, why the extraction pipeline is designed the way it is, and how narrative architecture steers AI reasoning.
 
+Read `CLOJURE.md` for Clojure-specific development guidelines — REPL discipline, structure-aware editing, and style conventions.
+
 ## Memory Policy
 
 - **Snapshot** = canonical truth. Cite it. Don't contradict it.
