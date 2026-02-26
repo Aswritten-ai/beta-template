@@ -24,7 +24,7 @@ jobs:
       contents: read
       actions: read
       checks: write
-    environment: ${{ github.ref == 'refs/heads/dev' && 'dev' || 'production' }}
+    environment: ${{ (github.ref == 'refs/heads/dev' || github.head_ref == 'dev') && 'dev' || 'production' }}
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
@@ -54,7 +54,6 @@ jobs:
         if: steps.check.outputs.skip != 'true'
         env:
           N8N_WEBHOOK_URL: ${{ vars.N8N_WEBHOOK_BASE || 'https://n8n.aswritten.ai' }}/webhook/story-generate
-          GH_PAT: ${{ secrets.REPO_PAT }}
           GH_REPO: ${{ github.repository }}
           GH_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
           GH_REF: ${{ github.head_ref || github.ref }}
@@ -101,11 +100,10 @@ jobs:
                   --arg sha "$GH_SHA" \
                   --arg ref "$GH_REF" \
                   --arg actor "$GH_ACTOR" \
-                  --arg token "$GH_PAT" \
                   --arg model "$DEFAULT_MODEL" \
                   --arg openrouter_key "$OPENROUTER_API_KEY" \
                   --argjson templates "[\"$template\"]" \
-                  '{token: $token, repo: $repo, sha: $sha, ref: $ref, actor: $actor, templates: $templates, model: $model, openrouter_key: $openrouter_key, event: "stories/draft"}')")
+                  '{repo: $repo, sha: $sha, ref: $ref, actor: $actor, templates: $templates, model: $model, openrouter_key: $openrouter_key, event: "stories/draft"}')")
 
               http_code=$(echo "$response" | tail -1)
               body=$(echo "$response" | sed '$d')
