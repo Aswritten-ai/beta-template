@@ -1,84 +1,81 @@
-# Welcome to the Collective Memory Beta
+# Welcome to the Beta: Building a Living Worldview
 
-You are testing a fundamental shift in how organizations think. Collective memory is not a documentation tool or a knowledge base; it is a Git-native RDF knowledge graph that serves as the single source of truth for every AI agent in your company.
+Welcome to the beta. You are here to help us validate a new category of organizational intelligence: the **Living Worldview**. This is not another documentation tool or a passive knowledge base. It is a Git-native narrative engine that transforms intentional memory-saving into a unified source of truth for every AI agent in your organization.
 
-The core value proposition is simple: **Your entire organization talks to AI that thinks exactly like your company thinks.**
+By participating in this beta, you are testing the hypothesis that organizational alignment isn't a communication problem—it's a version control problem. You will be using Git-native narrative evolution to branch, peer-review, and merge your company’s strategic direction just as you do with code.
 
-By participating in this beta, you are helping us validate the **living organizational worldview**. We are moving away from static, decaying docs and toward a narrative that evolves through the same Git workflows you use for code—branching, PRing, and merging the very logic of your business.
+## The Concept Model: One Worldview, Many Roles
 
-## The Concept Model
+Traditional organizations suffer from "narrative debt"—the gap between a founder's vision, a developer's implementation, and a salesperson's pitch. We solve this by unifying three product pillars into a single workflow:
 
-Collective memory unifies three pillars—strategy, execution, and narrative—into a single, compiled worldview.
+1.  **Intentional Memory-Saving**: You capture high-context moments (ADRs, call notes, strategic pivots) as raw Markdown.
+2.  **Compiled Worldview**: Our engine processes these memories into an RDF knowledge graph (the SNAPSHOT), creating a queryable "brain" for the company.
+3.  **AI Alignment**: Every AI agent—whether writing a README, a pitch deck, or a sales email—queries the same compiled snapshot, ensuring they never hallucinate facts that contradict your latest decisions.
 
-1.  **Intentional Memory-Saving:** You don't write "documentation debt." You save intentional memories (decisions, insights, pivots) as they happen.
-2.  **Compiled Worldview:** These memories are compiled into a machine-readable SNAPSHOT. This is the "brain" your AI agents use.
-3.  **AI Alignment:** Because every agent (coding assistants, sales bots, PM tools) queries the same snapshot, they stay perfectly aligned.
-
-### Why this matters: The "$10M Mistake"
-We built this to solve the strategy-execution disconnect. In our own history, a lack of shared worldview led to a "$10M mistake" where engineering and sales drifted so far apart that the product being built no longer matched the product being sold. Collective memory ensures that a strategic pivot in a founder's head ripples instantly into the IDE of every developer. [^10m-mistake]
-
-[^10m-mistake]: The "$10M mistake" is cited as the primary catalyst for the collective memory project, representing a catastrophic failure in organizational alignment where strategy and execution diverged. This concept is a "boulder" in the worldview, serving as the foundational "anti-pattern" the system is designed to prevent. (Source: `worldview:all` compilation; the specific transaction traces back to the project's origin story in the initial vision memories).
+This approach replaces "documentation debt" with "worldview building." When you save a memory, you aren't just filing a report; you are updating the weights of the model that guides your entire AI workforce.
 
 ## Getting Started
 
-### 1. Prerequisites
-*   **GitHub Access:** You need contributor access to your organization's collective memory repository.
-*   **MCP-Compatible AI Client:** We recommend Claude Desktop or any client that supports the Model Context Protocol (MCP).
+### Prerequisites
+*   **GitHub Access**: You need a dedicated repository for your collective memory.
+*   **MCP-Compatible AI Client**: We recommend Claude Desktop or any client supporting the Model Context Protocol (MCP) to interface with your memory server.
 
-### 2. Initial Setup
-*   **Clone the Repo:** Your repo follows a strict structure: `/memories` for raw input, `/transactions` for the graph ledger, and `/snapshots` for the compiled worldview.
-*   **Connect the MCP Server:** Point your AI client to the `collective-memory-mcp` server. This allows the AI to "read" the graph and "write" new memories directly to your Git flow.
+### Initial Setup
+1.  **Repo Structure**: Initialize your repository with two main directories: `/memories` (for your raw `.md` files) and `/transactions` (where the engine stores `.sparql` updates).
+2.  **Connect the MCP Server**: Point your AI client to the `aswritten-mcp` server. This allows your AI to "read" the compiled worldview and "write" new memories back to the repo.
 
-### 3. Your First Memory
-Don't start with a manual. Start with a decision. Use your AI assistant to record an **Architecture Decision Record (ADR)** or a strategic shift.
-*   *Example:* "We are moving from usage-based pricing to seat-based pricing because enterprise procurement needs predictability."
-*   The AI will format this as a `.md` file in `/memories` with the required metadata.
+### Your First Memory: The Strategic Decision
+Don't start with a status update. Start with a decision. Save an Architecture Decision Record (ADR) or a summary of a strategic pivot.
+*   **File naming**: Use the convention `YYYY-MM-DD-kebab-case-description.md`.
+*   **Content**: Focus on the *why*. What was the prior state? What is the new conviction?
 
-### 4. Compile the Worldview
-Run the `compile` command. You will see your decision move from a raw text file into a structured RDF graph. Your AI agents now "know" about the pricing change and its rationale.
+### Compiling the Worldview
+Once your memory is committed, run the `compile` command. This transforms your Markdown into an RDF snapshot. You can now ask your AI: *"What is our current conviction on [Topic X]?"* and it will answer based on the primary source you just wrote.
 
 ## The Core Workflow
 
-1.  **Save memories as you work:** Capture the *why*, not just the *what*. This is intentional worldview building.
-2.  **Compile to see the worldview:** The snapshot is the source of truth. If it’s not in the snapshot, the AI doesn't know it.
-3.  **Generate content from worldview:** Stop writing READMEs, pitch decks, and product briefs from scratch. Use the `story` tool to generate them directly from the snapshot.
-4.  **Branch when perspectives diverge:** If the team disagrees on a direction, create a branch. Use a Pull Request to debate the narrative. Merging the PR is the act of organizational alignment.
+1.  **Save memories as you work**: Capture the "why" behind the "what."
+2.  **Compile to see the worldview**: The snapshot becomes the source of truth for all agents.
+3.  **Generate content from worldview**: Stop writing READMEs or pitch decks from scratch. Tell the AI: *"Generate a product brief based on the latest worldview snapshot."*
+4.  **Branch when perspectives diverge**: If the leadership team is debating a new market entry, create a branch. The PR process becomes the venue for resolving organizational disagreement.
 
 ## Cross-Functional Ripple Effects
 
-A single memory flows through every role in the company:
+The power of a living worldview is how a single memory flows through different roles:
 
-*   **The Developer:** Asks, "Can I implement this custom API endpoint for Client X?" The AI, reading the worldview, responds: "No, we decided in ADR-001 to prioritize standardized GraphQL schemas to reduce maintenance overhead." [^adr-001]
-*   **The Sales Rep:** A prospect asks about the roadmap. The AI generates a one-pager that reflects the technical constraints saved by the dev team an hour ago.
-*   **The Executive:** Executes a strategic pivot. By updating one core strategy memory and re-compiling, every sales deck and product roadmap generated by AI across the company updates automatically.
+*   **The Developer's ADR**: A developer saves a memory deciding to use a specific API for security reasons.
+    *   *Sales Impact*: When a prospect asks about data privacy, the Sales AI generates an answer grounded in that specific technical decision.
+*   **The Sales Discovery**: A salesperson saves notes from a lost deal citing a missing feature.
+    *   *Product Impact*: The PM queries the worldview for "blockers" and sees the trend across multiple memories, informing the next sprint.
+*   **The Executive Pivot**: The CEO merges a PR shifting the company focus from SMB to Enterprise.
+    *   *Global Impact*: Every AI-generated output—from the website copy to the technical documentation—automatically updates to reflect the enterprise-first narrative.
 
-[^adr-001]: ADR-001 is a "grave" conviction node in the current snapshot, establishing the technical constraint of standardized schemas over custom endpoints. This decision sits at the root of the technical execution domain and governs all downstream API development. (Source: `worldview:engineering` layer; established by the Lead Architect in the Jan 2024 Technical Strategy session).
+## What to Try During Beta
 
-## What to Try During the Beta
-
-*   **Query from different perspectives:** Ask the AI "What is our biggest risk?" as a CEO, then ask again as a Junior Dev. See how the worldview provides context-aware alignment.
-*   **Create a "Shadow" Branch:** Create a branch where you take a completely different strategic direction (e.g., "What if we went Open Source?"). Generate a README from that branch to see how the narrative shifts.
-*   **The Ripple Test:** Change one "boulder" (a high-conviction fact) in the graph and see how many downstream "notions" it invalidates or changes.
-
-## Common Patterns
-
-*   **ADRs as Strategic Memory:** Use ADRs for more than just code; use them for "Organizational Architecture."
-*   **Customer Insights:** Save raw interview notes. The compiler extracts the "stakes" and "boulders" that should inform the product roadmap.
-*   **The PR as Alignment:** Use GitHub comments on a memory PR to hash out the nuances of a pivot before it becomes "truth" in the snapshot.
+*   **Test the "Conviction" levels**: Use the ontology terms (notion, stake, boulder, grave) to signal how firm a decision is. See if the AI respects these weights.[^conviction]
+*   **Query from different perspectives**: Ask the AI, "As a new engineer, what is the most important thing I need to know about our architecture?" then ask, "As a VC, why is our approach defensible?"
+*   **Create a Narrative Branch**: Branch the repo to explore a "What If" strategy. Generate a pitch deck from that branch and compare it to the main branch.
+*   **Observe the Delta**: When you update a memory, check how the AI explains the change from the prior state.
 
 ## Technical Notes
 
-*   **Architecture:** The system follows a `compile -> diff -> extract -> tx -> commit` pipeline.
-*   **File Naming:** All memories must follow the `MMDDYY-kebab-case-description.md` convention for proper temporal tracking.
-*   **Layers:** You can compile the graph in layers. Use `worldview` for a high-level summary or `graph:core` for the full RDF technical depth. [^layers]
+### Key Operations
+*   **Compile**: Aggregates memories into the RDF snapshot.
+*   **Extract**: Pulls facts and entities from raw text into the graph.
+*   **Transaction (TX)**: The intermediate `.sparql` step that traces a fact back to its source memory.
 
-[^layers]: The layering system is defined in the ONTOLOGY. `worldview:all` is the standard for story generation, while `graph` layers are reserved for technical introspection and provenance tracing. (Source: `ontology.ttl`).
+### Layer Compilation
+When querying the worldview, you can specify layers:
+*   `worldview`: A high-level overview of concepts.
+*   `worldview:{domain}`: Deep dive into specific areas (e.g., `worldview:engineering`).
+*   `graph`: The full RDF structure for complex tracing.
 
-## Feedback & Help
+## Getting Help & Giving Feedback
 
-This is a beta. The workflow of "branching a narrative" is new and may feel unintuitive. We want to know:
-*   Does the compiled worldview actually surface what you need?
-*   Do your AI agents feel more "sane" and aligned?
-*   What types of memories are you finding most valuable to save?
+We are looking for "narrative friction." If the compiled worldview feels out of sync with your intent, or if branching strategy feels clunky, we want to know.
+*   **Report Issues**: Use the GitHub Issue tracker in your memory repo.
+*   **Share Insights**: What memory types (ADRs, call notes, Slack snippets) provide the most "signal" for your AI agents?
 
-Report issues via GitHub or in the `#collective-memory-beta` Slack channel. Your feedback directly shapes the evolution of the organizational brain.
+---
+
+[^conviction]: The ontology defines "Conviction" as the weight assigned to knowledge. Levels include **notion** (exploratory), **stake** (leaning), **boulder** (firm decision), and **grave** (foundational/unchanging). This allows the AI to distinguish between a casual brainstorm and a non-negotiable strategy. (Ontology Definition, `narr:conviction`).
